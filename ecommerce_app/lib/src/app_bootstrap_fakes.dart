@@ -15,18 +15,18 @@ import 'package:ecommerce_app/src/features/cart/data/local/local_cart_repository
 /// app with a "fake" backend.
 ///
 /// Note: all repositories needed by the app can be accessed via providers.
-/// However, most of these providers throw an [UnimplementedError] by default.
+/// Some of these providers throw an [UnimplementedError] by default.
 ///
 /// Example:
 /// ```dart
-/// @Riverpod(keepAlive: true)
-/// AuthRepository authRepository(AuthRepositoryRef ref) {
+/// final localCartRepositoryProvider = Provider<LocalCartRepository>((ref) {
 ///  throw UnimplementedError();
-/// }
+/// });
 /// ```
 ///
-/// As a result, we can explicitly create the repositories we want to use,
-/// and use them by overriding the corresponding providers.
+/// As a result, this method does two things:
+/// - create and configure the repositories as desired
+/// - override the default implementations with a list of "overrides"
 Future<ProviderContainer> createFakesProviderContainer(
     {bool addDelay = true}) async {
   final authRepository = FakeAuthRepository(addDelay: addDelay);
