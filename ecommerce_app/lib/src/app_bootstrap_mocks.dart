@@ -18,6 +18,23 @@ import 'package:ecommerce_app/src/features/checkout/application/checkout_service
 
 import 'features/reviews/application/fake_reviews_service.dart';
 
+/// Creates the top-level [ProviderContainer] by overriding providers with fake
+/// repositories only. This is useful for testing purposes and for running the
+/// app with a "fake" backend.
+///
+/// Note: all repositories needed by the app can be accessed via providers.
+/// However, most of these providers throw an [UnimplementedError] by default.
+///
+/// Example:
+/// ```dart
+/// @Riverpod(keepAlive: true)
+/// AuthRepository authRepository(AuthRepositoryRef ref) {
+///  throw UnimplementedError();
+/// }
+/// ```
+///
+/// As a result, we can explicitly create the repositories we want to use,
+/// and use them by overriding the corresponding providers.
 Future<ProviderContainer> createMocksProviderContainer(
     {bool addDelay = true}) async {
   final authRepository = FakeAuthRepository(addDelay: addDelay);

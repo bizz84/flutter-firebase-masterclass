@@ -32,7 +32,7 @@ GoRouter goRouter(GoRouterRef ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return GoRouter(
     initialLocation: '/',
-    debugLogDiagnostics: false,
+    debugLogDiagnostics: true,
     redirect: (context, state) async {
       final user = authRepository.currentUser;
       final isLoggedIn = user != null;

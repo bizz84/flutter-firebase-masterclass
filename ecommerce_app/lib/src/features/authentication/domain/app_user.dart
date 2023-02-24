@@ -6,7 +6,7 @@ typedef UserID = String;
 class AppUser extends Equatable {
   const AppUser({
     required this.uid,
-    required this.email,
+    this.email,
   });
   final UserID uid;
   final String? email;

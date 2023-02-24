@@ -7,6 +7,7 @@ import 'package:ecommerce_app/src/features/cart/application/cart_sync_service.da
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
 
 class AppBootstrap {
+  /// Create the root widget that should be passed to [runApp].
   Widget createRootWidget({required ProviderContainer container}) {
     // * Initialize CartSyncService to start the listener
     container.read(cartSyncServiceProvider);
@@ -18,7 +19,6 @@ class AppBootstrap {
 
     return UncontrolledProviderScope(
       container: container,
-      //observers: [ProviderLogger()],
       child: const MyApp(),
     );
   }
