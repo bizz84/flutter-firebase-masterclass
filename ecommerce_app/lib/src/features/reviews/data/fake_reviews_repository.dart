@@ -1,11 +1,11 @@
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
-import 'package:ecommerce_app/src/features/reviews/data/reviews_repository.dart';
 import 'package:ecommerce_app/src/features/reviews/domain/review.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// A repository used to store all user reviews for all products
-class FakeReviewsRepository implements ReviewsRepository {
+class FakeReviewsRepository {
   FakeReviewsRepository({this.addDelay = true});
   final bool addDelay;
 
@@ -16,7 +16,6 @@ class FakeReviewsRepository implements ReviewsRepository {
 
   /// Single review for a given product given by a specific user
   /// Emits non-null values if the user has reviewed the product
-  @override
   Stream<Review?> watchUserReview(ProductID id, String uid) {
     return _reviews.stream.map((reviewsData) {
       // access nested maps by productId, then uid
@@ -26,14 +25,12 @@ class FakeReviewsRepository implements ReviewsRepository {
 
   /// Single review for a given product given by a specific user
   /// Returns a non-null value if the user has reviewed the product
-  @override
   Future<Review?> fetchUserReview(ProductID id, String uid) async {
     // access nested maps by productId, then uid
     return Future.value(_reviews.value[id]?[uid]);
   }
 
   /// All reviews for a given product from all users
-  @override
   Stream<List<Review>> watchReviews(ProductID id) {
     return _reviews.stream.map((reviewsData) {
       // access nested maps by productId, then uid
@@ -47,7 +44,6 @@ class FakeReviewsRepository implements ReviewsRepository {
   }
 
   /// All reviews for a given product from all users
-  @override
   Future<List<Review>> fetchReviews(ProductID id) {
     // access nested maps by productId, then uid
     final reviews = _reviews.value[id];
@@ -62,7 +58,6 @@ class FakeReviewsRepository implements ReviewsRepository {
   /// @param productId the product identifier
   /// @param uid the identifier of the user who is leaving the review
   /// @param review a [Review] object with the review information
-  @override
   Future<void> setReview({
     required ProductID productId,
     required String uid,
@@ -81,3 +76,12 @@ class FakeReviewsRepository implements ReviewsRepository {
     _reviews.value = allReviews;
   }
 }
+
+final reviewsRepositoryProvider = Provider<FakeReviewsRepository>((ref) {
+  return FakeReviewsRepository(addDelay: true);
+});
+
+final productReviewsProvider = StreamProvider.autoDispose
+    .family<List<Review>, ProductID>((ref, productId) {
+  return ref.watch(reviewsRepositoryProvider).watchReviews(productId);
+});

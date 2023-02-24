@@ -1,22 +1,24 @@
-import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
+import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
 import 'package:ecommerce_app/src/features/products/data/fake_products_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
-import 'package:ecommerce_app/src/features/reviews/application/reviews_service.dart';
-import 'package:ecommerce_app/src/features/reviews/data/reviews_repository.dart';
+import 'package:ecommerce_app/src/features/reviews/data/fake_reviews_repository.dart';
 import 'package:ecommerce_app/src/features/reviews/domain/review.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class FakeReviewsService implements ReviewsService {
+part 'fake_reviews_service.g.dart';
+
+class FakeReviewsService {
   const FakeReviewsService({
     required this.fakeProductsRepository,
     required this.authRepository,
     required this.reviewsRepository,
   });
   final FakeProductsRepository fakeProductsRepository;
-  final AuthRepository authRepository;
-  final ReviewsRepository reviewsRepository;
+  final FakeAuthRepository authRepository;
+  final FakeReviewsRepository reviewsRepository;
 
-  @override
   Future<void> submitReview({
     required ProductID productId,
     required Review review,
@@ -65,3 +67,37 @@ class FakeReviewsService implements ReviewsService {
     }
   }
 }
+
+final reviewsServiceProvider = Provider<FakeReviewsService>((ref) {
+  return FakeReviewsService(
+    fakeProductsRepository: ref.watch(productsRepositoryProvider),
+    authRepository: ref.watch(authRepositoryProvider),
+    reviewsRepository: ref.watch(reviewsRepositoryProvider),
+  );
+});
+
+/// Check if a product was previously reviewed by the user
+@riverpod
+Future<Review?> userReviewFuture(UserReviewFutureRef ref, ProductID productId) {
+  final user = ref.watch(authStateChangesProvider).value;
+  if (user != null) {
+    return ref
+        .watch(reviewsRepositoryProvider)
+        .fetchUserReview(productId, user.uid);
+  } else {
+    return Future.value(null);
+  }
+}
+
+/// Check if a product was previously reviewed by the user
+final userReviewStreamProvider =
+    StreamProvider.autoDispose.family<Review?, ProductID>((ref, productId) {
+  final user = ref.watch(authStateChangesProvider).value;
+  if (user != null) {
+    return ref
+        .watch(reviewsRepositoryProvider)
+        .watchUserReview(productId, user.uid);
+  } else {
+    return Stream.value(null);
+  }
+});

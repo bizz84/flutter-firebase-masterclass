@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/src/app.dart';
-import 'package:ecommerce_app/src/app_bootstrap_mocks.dart';
+import 'package:ecommerce_app/src/app_bootstrap_fakes.dart';
 import 'package:ecommerce_app/src/features/cart/application/cart_sync_service.dart';
 import 'package:ecommerce_app/src/features/products/presentation/home_app_bar/more_menu_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +31,7 @@ class Robot {
   final GoldenRobot golden;
 
   Future<void> pumpMyAppWithMocks() async {
-    final container = await createMocksProviderContainer(addDelay: false);
+    final container = await createFakesProviderContainer(addDelay: false);
     // * Initialize CartSyncService to start the listener
     container.read(cartSyncServiceProvider);
     // * Entry point of the app
