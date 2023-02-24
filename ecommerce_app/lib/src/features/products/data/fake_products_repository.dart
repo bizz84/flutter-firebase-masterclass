@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ecommerce_app/src/constants/test_products.dart';
+import 'package:ecommerce_app/src/features/products/data/test_products.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
@@ -68,6 +68,8 @@ class FakeProductsRepository {
   }
 
   static Product? _getProduct(List<Product> products, String id) {
+    // * This can also be implemented with [firstWhereOrNull] from this package:
+    // * https://api.flutter.dev/flutter/package-collection_collection/IterableExtension/firstWhereOrNull.html
     try {
       return products.firstWhere((product) => product.id == id);
     } catch (e) {

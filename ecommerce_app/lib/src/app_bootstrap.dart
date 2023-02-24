@@ -6,6 +6,7 @@ import 'package:ecommerce_app/src/exceptions/error_logger.dart';
 import 'package:ecommerce_app/src/features/cart/application/cart_sync_service.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
 
+/// Helper class to initialize services and configure the error handlers
 class AppBootstrap {
   /// Create the root widget that should be passed to [runApp].
   Widget createRootWidget({required ProviderContainer container}) {

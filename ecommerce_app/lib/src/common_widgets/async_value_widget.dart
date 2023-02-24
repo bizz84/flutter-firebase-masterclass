@@ -2,6 +2,10 @@ import 'package:ecommerce_app/src/common_widgets/error_message_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// A reusable widget to provide default loading and error widgets when working
+/// with AsyncValue.
+/// More info here:
+/// https://codewithandrea.com/articles/async-value-widget-riverpod/
 class AsyncValueWidget<T> extends StatelessWidget {
   const AsyncValueWidget({super.key, required this.value, required this.data});
   final AsyncValue<T> value;

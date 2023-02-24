@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/src/constants/test_products.dart';
+import 'package:ecommerce_app/src/features/products/data/test_products.dart';
 import 'package:ecommerce_app/src/features/cart/application/cart_service.dart';
 import 'package:ecommerce_app/src/features/cart/domain/cart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/src/constants/test_products.dart';
+import 'package:ecommerce_app/src/features/products/data/test_products.dart';
 import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
 import 'package:ecommerce_app/src/features/reviews/application/fake_reviews_service.dart';
 import 'package:ecommerce_app/src/features/reviews/domain/review.dart';
