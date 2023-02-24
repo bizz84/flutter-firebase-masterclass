@@ -16,10 +16,9 @@ abstract class ProductsRepository {
   Future<List<Product>> searchProducts(String query);
 }
 
-@riverpod
-ProductsRepository productsRepository(ProductsRepositoryRef ref) {
+final productsRepositoryProvider = Provider<ProductsRepository>((ref) {
   throw UnimplementedError();
-}
+});
 
 final productsListStreamProvider =
     StreamProvider.autoDispose<List<Product>>((ref) {

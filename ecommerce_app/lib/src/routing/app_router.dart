@@ -14,8 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'app_router.g.dart';
-
 enum AppRoute {
   home,
   product,
@@ -27,8 +25,7 @@ enum AppRoute {
   signIn,
 }
 
-@Riverpod(keepAlive: true)
-GoRouter goRouter(GoRouterRef ref) {
+final goRouterProvider = Provider<GoRouter>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return GoRouter(
     initialLocation: '/',
@@ -130,4 +127,4 @@ GoRouter goRouter(GoRouterRef ref) {
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );
-}
+});
