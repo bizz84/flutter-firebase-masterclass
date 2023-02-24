@@ -35,8 +35,9 @@ import 'features/reviews/application/fake_reviews_service.dart';
 /// As a result, this method does two things:
 /// - create and configure the repositories as desired
 /// - override the default implementations with a list of "overrides"
-Future<ProviderContainer> createFakesProviderContainer(
+Future<ProviderContainer> createFirebaseProviderContainer(
     {bool addDelay = true}) async {
+  // TODO: Replace with Firebase repositories
   final authRepository = FakeAuthRepository(addDelay: addDelay);
   final productsRepository = FakeProductsRepository(addDelay: addDelay);
   final reviewsRepository = FakeReviewsRepository(addDelay: addDelay);

@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/src/features/checkout/application/fake_checkout_service.dart';
+import 'package:ecommerce_app/src/features/checkout/application/checkout_service.dart';
 import 'package:ecommerce_app/src/features/checkout/presentation/payment/payment_button_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
