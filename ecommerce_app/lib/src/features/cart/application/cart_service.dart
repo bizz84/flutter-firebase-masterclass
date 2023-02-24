@@ -68,10 +68,9 @@ class CartService {
   }
 }
 
-@Riverpod(keepAlive: true)
-CartService cartService(CartServiceRef ref) {
+final cartServiceProvider = Provider<CartService>((ref) {
   return CartService(ref);
-}
+});
 
 // Riverpod Generator doesn't support streams yet:
 // https://github.com/rrousselGit/riverpod/issues/1663

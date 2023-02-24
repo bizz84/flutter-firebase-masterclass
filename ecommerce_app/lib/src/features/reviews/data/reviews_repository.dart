@@ -2,9 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/features/reviews/domain/review.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'reviews_repository.g.dart';
 
 abstract class ReviewsRepository {
   /// Single review for a given product given by a specific user
@@ -32,11 +29,9 @@ abstract class ReviewsRepository {
   });
 }
 
-@Riverpod(keepAlive: true)
-ReviewsRepository reviewsRepository(ReviewsRepositoryRef ref) {
-  // This should be overridden in main file
+final reviewsRepositoryProvider = Provider<ReviewsRepository>((ref) {
   throw UnimplementedError();
-}
+});
 
 final productReviewsProvider = StreamProvider.autoDispose
     .family<List<Review>, ProductID>((ref, productId) {

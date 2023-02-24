@@ -14,10 +14,9 @@ abstract class ReviewsService {
   });
 }
 
-@Riverpod(keepAlive: true)
-ReviewsService reviewsService(ReviewsServiceRef ref) {
+final reviewsServiceProvider = Provider<ReviewsService>((ref) {
   throw UnimplementedError();
-}
+});
 
 /// Check if a product was previously reviewed by the user
 @riverpod
