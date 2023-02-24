@@ -16,8 +16,8 @@ void main() {
     registerFallbackValue(Order(
       id: '1',
       userId: testUser.uid,
-      items: {'1': 1},
-      productIds: ['1'],
+      items: const {'1': 1},
+      productIds: const ['1'],
       orderStatus: OrderStatus.confirmed,
       orderDate: testDate,
       total: 15,

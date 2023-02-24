@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/src/app_bootstrap_mocks.dart';
+import 'package:ecommerce_app/src/app_bootstrap_fakes.dart';
 import 'package:ecommerce_app/src/app_bootstrap.dart';
 // ignore:depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -11,7 +11,7 @@ void main() async {
 
   final appBootstrap = AppBootstrap();
 
-  final container = await createMocksProviderContainer();
+  final container = await createFakesProviderContainer();
   final root = appBootstrap.createRootWidget(container: container);
   runApp(root);
 }

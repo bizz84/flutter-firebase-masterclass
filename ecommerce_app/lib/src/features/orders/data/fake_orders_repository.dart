@@ -1,11 +1,11 @@
 import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
-import 'package:ecommerce_app/src/features/orders/data/orders_repository.dart';
 import 'package:ecommerce_app/src/features/orders/domain/order.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FakeOrdersRepository implements OrdersRepository {
+class FakeOrdersRepository {
   FakeOrdersRepository({this.addDelay = true});
   final bool addDelay;
 
@@ -17,7 +17,6 @@ class FakeOrdersRepository implements OrdersRepository {
   /// A stream that returns all the orders for a given user, ordered by date
   /// Only user orders that match the given productId will be returned.
   /// If a productId is not passed, all user orders will be returned.
-  @override
   Stream<List<Order>> watchUserOrders(UserID uid, {ProductID? productId}) {
     return _orders.stream.map((ordersData) {
       final ordersList = ordersData[uid] ?? [];
@@ -44,3 +43,7 @@ class FakeOrdersRepository implements OrdersRepository {
     _orders.value = value;
   }
 }
+
+final ordersRepositoryProvider = Provider<FakeOrdersRepository>((ref) {
+  return FakeOrdersRepository(addDelay: true);
+});
