@@ -55,9 +55,9 @@ class FakeReviewsRepository {
   }
 
   /// Submit a new review or update an existing review for a given product
-  /// @param productId the product identifier
-  /// @param uid the identifier of the user who is leaving the review
-  /// @param review a [Review] object with the review information
+  /// - [productId] is the product identifier.
+  /// - [uid] is the identifier of the user who is leaving the review
+  /// - [review] is the review information to be written
   Future<void> setReview({
     required ProductID productId,
     required String uid,
