@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/src/exceptions/app_exception.dart';
 import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
-import 'package:ecommerce_app/src/features/authentication/domain/fake_app_user.dart';
+import 'package:ecommerce_app/src/features/authentication/data/fake_app_user.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
