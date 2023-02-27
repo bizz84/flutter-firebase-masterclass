@@ -7,14 +7,6 @@ void main() {
         addDelay: false,
       );
   group('FakeProductsRepository', () {
-    test('getProductsList returns global list', () {
-      final productsRepository = makeProductsRepository();
-      expect(
-        productsRepository.getProductsList(),
-        kTestProducts,
-      );
-    });
-
     test('getProduct(1) returns first item', () {
       final productsRepository = makeProductsRepository();
       expect(

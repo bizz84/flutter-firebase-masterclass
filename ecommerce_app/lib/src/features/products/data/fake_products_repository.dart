@@ -16,23 +16,25 @@ class FakeProductsRepository {
   /// Preload with the default list of products when the app starts
   final _products = InMemoryStore<List<Product>>(List.from(kTestProducts));
 
-  List<Product> getProductsList() {
-    return _products.value;
-  }
-
-  Product? getProduct(String id) {
+  /// Get a product by ID.
+  /// This method is only used by some of the "fake" services in the app.
+  /// In real-world apps, remote data can only be obtained asynchronously.
+  Product? getProduct(ProductID id) {
     return _getProduct(_products.value, id);
   }
 
+  // Retrieve the products list as a [Future] (one-time read)
   Future<List<Product>> fetchProductsList() async {
     return Future.value(_products.value);
   }
 
+  // Retrieve the products list as a [Stream] (for realtime updates)
   Stream<List<Product>> watchProductsList() {
     return _products.stream;
   }
 
-  Stream<Product?> watchProduct(String id) {
+  // Retrieve a specific product by ID
+  Stream<Product?> watchProduct(ProductID id) {
     return watchProductsList().map((products) => _getProduct(products, id));
   }
 
