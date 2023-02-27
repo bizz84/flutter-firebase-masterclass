@@ -14,6 +14,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+/// All the supported routes in the app.
+/// By using an enum, we route by name using this syntax:
+/// ```dart
+/// context.goNamed(AppRoute.orders.name)
+/// ```
 enum AppRoute {
   home,
   product,
@@ -25,11 +30,13 @@ enum AppRoute {
   signIn,
 }
 
+/// returns the GoRouter instance that defines all the routes in the app
 final goRouterProvider = Provider<GoRouter>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return GoRouter(
     initialLocation: '/',
     debugLogDiagnostics: true,
+    // * redirect logic based on the authentication state
     redirect: (context, state) async {
       final user = authRepository.currentUser;
       final isLoggedIn = user != null;
