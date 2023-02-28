@@ -221,26 +221,26 @@ packages:
     dependency: "direct dev"
     description:
       name: custom_lint
-      sha256: "29b7e51b5e75fcd5ffce8fc12af87b71cbde7a59d080467b187630231aeb42c0"
+      sha256: "8df4335b86ff9695770dfec9599d1b2d87d997b2db59827f11381ecd62ab572e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.5"
+    version: "0.2.11"
   custom_lint_builder:
     dependency: transitive
     description:
       name: custom_lint_builder
-      sha256: b58a4d9a80c4b7460fb22afcb3ceb4a6470e79a7321f107e8ca756c050caa8bf
+      sha256: "0b245895394dcdad34975490e5ce4cfd5d8ee8f78394639b16e0c0ef9f3d7780"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.10"
+    version: "0.2.11"
   custom_lint_core:
     dependency: transitive
     description:
       name: custom_lint_core
-      sha256: "4592ac37e7cf4c9410268765f1c8ca3520309bbd0a340f3dfd047d18e5351962"
+      sha256: a6edd96a870f1eb1305fce8af2fd410f6f08ec01bdfe2aa244093ad353f72aa6
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.10"
+    version: "0.2.11"
   dart_style:
     dependency: transitive
     description:
@@ -411,10 +411,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "7a79232827c851f6b9f08c3c7254a1eaff7bc6aa147e103e51f951c5c10b0ccc"
+      sha256: b4bb06205ec607278b6fc23db238278417bca84a3905779cc68d1eb7afae37e2
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.9"
+    version: "6.2.0"
   graphs:
     dependency: transitive
     description:
