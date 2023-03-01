@@ -77,7 +77,8 @@ FakeAuthRepository authRepository(AuthRepositoryRef ref) {
   return FakeAuthRepository(addDelay: true);
 }
 
-// * Using keepAlive since we can check this stream anytime in the app lifecycle
+// * Using keepAlive since other providers need it to be an
+// * [AlwaysAliveProviderListenable]
 @Riverpod(keepAlive: true)
 Stream<AppUser?> authStateChanges(AuthStateChangesRef ref) {
   final authRepository = ref.watch(authRepositoryProvider);

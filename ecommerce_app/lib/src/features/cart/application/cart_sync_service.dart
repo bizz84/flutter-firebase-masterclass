@@ -84,7 +84,8 @@ class CartSyncService {
   }
 }
 
-@riverpod
+// * Using keepAlive since this should live for the entire app lifecycle
+@Riverpod(keepAlive: true)
 CartSyncService cartSyncService(CartSyncServiceRef ref) {
   return CartSyncService(ref);
 }
