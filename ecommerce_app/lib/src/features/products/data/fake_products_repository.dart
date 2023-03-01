@@ -4,7 +4,6 @@ import 'package:ecommerce_app/src/features/products/data/test_products.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fake_products_repository.g.dart';
@@ -80,15 +79,16 @@ class FakeProductsRepository {
   }
 }
 
-final productsRepositoryProvider = Provider<FakeProductsRepository>((ref) {
+@Riverpod(keepAlive: true)
+FakeProductsRepository productsRepository(ProductsRepositoryRef ref) {
   return FakeProductsRepository(addDelay: true);
-});
+}
 
-final productsListStreamProvider =
-    StreamProvider.autoDispose<List<Product>>((ref) {
+@riverpod
+Stream<List<Product>> productsListStream(ProductsListStreamRef ref) {
   final productsRepository = ref.watch(productsRepositoryProvider);
   return productsRepository.watchProductsList();
-});
+}
 
 @riverpod
 Future<List<Product>> productsListFuture(ProductsListFutureRef ref) {
@@ -96,11 +96,11 @@ Future<List<Product>> productsListFuture(ProductsListFutureRef ref) {
   return productsRepository.fetchProductsList();
 }
 
-final productProvider =
-    StreamProvider.autoDispose.family<Product?, ProductID>((ref, id) {
+@riverpod
+Stream<Product?> product(ProductRef ref, ProductID id) {
   final productsRepository = ref.watch(productsRepositoryProvider);
   return productsRepository.watchProduct(id);
-});
+}
 
 @riverpod
 Future<List<Product>> productsListSearch(

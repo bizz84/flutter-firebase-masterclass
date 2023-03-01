@@ -19,9 +19,10 @@ import 'package:ecommerce_app/src/features/cart/data/local/local_cart_repository
 ///
 /// Example:
 /// ```dart
-/// final localCartRepositoryProvider = Provider<LocalCartRepository>((ref) {
-///  throw UnimplementedError();
-/// });
+/// @Riverpod(keepAlive: true)
+/// LocalCartRepository localCartRepository(LocalCartRepositoryRef ref) {
+///   throw UnimplementedError();
+/// }
 /// ```
 ///
 /// As a result, this method does two things:

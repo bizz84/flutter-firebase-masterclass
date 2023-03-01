@@ -68,22 +68,22 @@ class CartService {
   }
 }
 
-final cartServiceProvider = Provider<CartService>((ref) {
+@riverpod
+CartService cartService(CartServiceRef ref) {
   return CartService(ref);
-});
+}
 
-// Riverpod Generator doesn't support streams yet:
-// https://github.com/rrousselGit/riverpod/issues/1663
-final cartProvider = StreamProvider<Cart>((ref) {
+@riverpod
+Stream<Cart> cart(CartRef ref) {
   final user = ref.watch(authStateChangesProvider).value;
   if (user != null) {
     return ref.watch(remoteCartRepositoryProvider).watchCart(user.uid);
   } else {
     return ref.watch(localCartRepositoryProvider).watchCart();
   }
-});
+}
 
-@Riverpod(keepAlive: true)
+@riverpod
 int cartItemsCount(CartItemsCountRef ref) {
   return ref.watch(cartProvider).maybeMap(
         data: (cart) => cart.value.items.length,
