@@ -4,7 +4,6 @@ import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/features/reviews/data/fake_reviews_repository.dart';
 import 'package:ecommerce_app/src/features/reviews/domain/review.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fake_reviews_service.g.dart';
@@ -68,13 +67,14 @@ class FakeReviewsService {
   }
 }
 
-final reviewsServiceProvider = Provider<FakeReviewsService>((ref) {
+@riverpod
+FakeReviewsService reviewsService(ReviewsServiceRef ref) {
   return FakeReviewsService(
     fakeProductsRepository: ref.watch(productsRepositoryProvider),
     authRepository: ref.watch(authRepositoryProvider),
     reviewsRepository: ref.watch(reviewsRepositoryProvider),
   );
-});
+}
 
 /// Check if a product was previously reviewed by the user
 @riverpod
@@ -90,8 +90,8 @@ Future<Review?> userReviewFuture(UserReviewFutureRef ref, ProductID productId) {
 }
 
 /// Check if a product was previously reviewed by the user
-final userReviewStreamProvider =
-    StreamProvider.autoDispose.family<Review?, ProductID>((ref, productId) {
+@riverpod
+Stream<Review?> userReviewStream(UserReviewStreamRef ref, ProductID productId) {
   final user = ref.watch(authStateChangesProvider).value;
   if (user != null) {
     return ref
@@ -100,4 +100,4 @@ final userReviewStreamProvider =
   } else {
     return Stream.value(null);
   }
-});
+}

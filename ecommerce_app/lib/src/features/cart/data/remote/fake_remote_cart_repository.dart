@@ -2,7 +2,9 @@ import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
 import 'package:ecommerce_app/src/features/cart/domain/cart.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'fake_remote_cart_repository.g.dart';
 
 class FakeRemoteCartRepository {
   FakeRemoteCartRepository({this.addDelay = true});
@@ -32,6 +34,7 @@ class FakeRemoteCartRepository {
   }
 }
 
-final remoteCartRepositoryProvider = Provider<FakeRemoteCartRepository>((ref) {
+@Riverpod(keepAlive: true)
+FakeRemoteCartRepository remoteCartRepository(RemoteCartRepositoryRef ref) {
   return FakeRemoteCartRepository(addDelay: false);
-});
+}
