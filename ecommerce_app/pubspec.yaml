@@ -38,7 +38,7 @@ dev_dependencies:
   freezed: 2.3.2
   flutter_lints: 2.0.1
   custom_lint: 0.2.12
-  riverpod_lint: 1.1.0
+  riverpod_lint: 1.1.1
   mocktail: 0.3.0
   riverpod_generator: 2.0.0
 
