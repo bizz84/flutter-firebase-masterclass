@@ -8,7 +8,7 @@ void main() {
     testWidgets('Empty shopping cart', (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         r.products.expectProductsListLoaded();
         await r.cart.openCart();
         r.cart.expectShoppingCartIsEmpty();
@@ -18,7 +18,7 @@ void main() {
     testWidgets('Add product with quantity = 1', (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         await r.products.selectProduct();
         await r.cart.addToCart();
         await r.cart.openCart();
@@ -30,7 +30,7 @@ void main() {
     testWidgets('Add product with quantity = 5', (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         await r.products.selectProduct();
         await r.products.setProductQuantity(5);
         await r.cart.addToCart();
@@ -43,7 +43,7 @@ void main() {
     testWidgets('Add product with quantity = 6', (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         await r.products.selectProduct();
         await r.products.setProductQuantity(6);
         await r.cart.addToCart();
@@ -57,7 +57,7 @@ void main() {
         (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         await r.products.selectProduct();
         await r.products.setProductQuantity(2);
         await r.cart.addToCart();
@@ -72,7 +72,7 @@ void main() {
         (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         await r.products.selectProduct();
         await r.products.setProductQuantity(5);
         await r.cart.addToCart();
@@ -86,7 +86,7 @@ void main() {
     testWidgets('Add two products', (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         // add first product
         await r.products.selectProduct(atIndex: 0);
         await r.cart.addToCart();
@@ -103,7 +103,7 @@ void main() {
     testWidgets('Add product, then delete it', (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         await r.products.selectProduct();
         await r.cart.addToCart();
         await r.cart.openCart();
@@ -116,7 +116,7 @@ void main() {
         (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         await r.products.selectProduct();
         await r.products.setProductQuantity(5);
         await r.cart.addToCart();
@@ -129,7 +129,7 @@ void main() {
         (tester) async {
       await tester.runAsync(() async {
         final r = Robot(tester);
-        await r.pumpMyAppWithMocks();
+        await r.pumpMyAppWithFakes();
         await r.products.selectProduct();
         await r.products.setProductQuantity(5);
         await r.cart.addToCart();

@@ -30,7 +30,7 @@ class Robot {
   final ReviewsRobot reviews;
   final GoldenRobot golden;
 
-  Future<void> pumpMyAppWithMocks() async {
+  Future<void> pumpMyAppWithFakes() async {
     final container = await createFakesProviderContainer(addDelay: false);
     // * Initialize CartSyncService to start the listener
     container.read(cartSyncServiceProvider);

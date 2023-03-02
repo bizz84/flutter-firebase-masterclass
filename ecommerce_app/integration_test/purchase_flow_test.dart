@@ -12,7 +12,7 @@ void main() {
     // * A Timer is still pending even after the widget tree was disposed.
     await tester.runAsync(() async {
       final r = Robot(tester);
-      await r.pumpMyAppWithMocks();
+      await r.pumpMyAppWithFakes();
       await r.fullPurchaseFlow();
     });
   });

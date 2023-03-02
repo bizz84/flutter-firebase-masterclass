@@ -8,7 +8,7 @@ void main() {
   testWidgets('checkout when not previously signed in', (tester) async {
     await tester.runAsync(() async {
       final r = Robot(tester);
-      await r.pumpMyAppWithMocks();
+      await r.pumpMyAppWithFakes();
       // add a product and start checkout
       await r.products.selectProduct();
       await r.cart.addToCart();
@@ -25,7 +25,7 @@ void main() {
   testWidgets('checkout when previously signed in', (tester) async {
     await tester.runAsync(() async {
       final r = Robot(tester);
-      await r.pumpMyAppWithMocks();
+      await r.pumpMyAppWithFakes();
       // create an account first
       await r.auth.openEmailPasswordSignInScreen();
       await r.auth.tapFormToggleButton();
