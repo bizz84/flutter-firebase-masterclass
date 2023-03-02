@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'reviews_service.g.dart';
 
+// TODO: Implement with Firebase
 abstract class ReviewsService {
   Future<void> submitReview({
     required ProductID productId,
@@ -15,6 +16,7 @@ abstract class ReviewsService {
 
 @riverpod
 ReviewsService reviewsService(ReviewsServiceRef ref) {
+  // TODO: create and return service
   throw UnimplementedError();
 }
 

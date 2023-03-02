@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'products_repository.g.dart';
 
+// TODO: Implement with Firebase
 abstract class ProductsRepository {
   Future<List<Product>> fetchProductsList();
 
@@ -17,6 +18,7 @@ abstract class ProductsRepository {
 
 @Riverpod(keepAlive: true)
 ProductsRepository productsRepository(ProductsRepositoryRef ref) {
+  // TODO: create and return repository
   throw UnimplementedError();
 }
 

@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_repository.g.dart';
 
+// TODO: Implement with Firebase
 abstract class AuthRepository {
   Future<void> signInWithEmailAndPassword(String email, String password);
   Future<void> createUserWithEmailAndPassword(String email, String password);
@@ -15,6 +16,7 @@ abstract class AuthRepository {
 
 @Riverpod(keepAlive: true)
 AuthRepository authRepository(AuthRepositoryRef ref) {
+  // TODO: create and return repository
   throw UnimplementedError();
 }
 
