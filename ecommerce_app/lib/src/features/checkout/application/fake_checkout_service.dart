@@ -1,16 +1,14 @@
-import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
-import 'package:ecommerce_app/src/features/cart/data/remote/fake_remote_cart_repository.dart';
+import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
+import 'package:ecommerce_app/src/features/cart/data/remote/remote_cart_repository.dart';
 import 'package:ecommerce_app/src/features/cart/domain/cart.dart';
+import 'package:ecommerce_app/src/features/checkout/application/checkout_service.dart';
 import 'package:ecommerce_app/src/features/orders/data/fake_orders_repository.dart';
 import 'package:ecommerce_app/src/features/orders/domain/order.dart';
 import 'package:ecommerce_app/src/features/products/data/fake_products_repository.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'fake_checkout_service.g.dart';
 
 /// A fake checkout service that doesn't process real payments.
-class FakeCheckoutService {
+class FakeCheckoutService implements CheckoutService {
   // * To make writing unit tests easier, here we pass all dependencies as
   // * arguments rather than using a Ref
   const FakeCheckoutService({
@@ -20,8 +18,11 @@ class FakeCheckoutService {
     required this.fakeProducsRepository,
     required this.currentDateBuilder,
   });
-  final FakeAuthRepository authRepository;
-  final FakeRemoteCartRepository remoteCartRepository;
+  final AuthRepository authRepository;
+  final RemoteCartRepository remoteCartRepository;
+  // * since this is a "fake" checkout service, it relies on some methods that
+  // * are only implemented in the [FakeOrdersRepository]
+  // * and [FakeProductsRepository], but not on their base classes
   final FakeOrdersRepository fakeOrdersRepository;
   final FakeProductsRepository fakeProducsRepository;
   final DateTime Function() currentDateBuilder;
@@ -32,6 +33,7 @@ class FakeCheckoutService {
   /// - show the payment UI
   /// - process the payment and fullfill the order
   /// The server-side logic will be covered in course #2
+  @override
   Future<void> placeOrder() async {
     // * Assertion operator is ok here since this method is only called from
     // * a place where the user is signed in
@@ -76,15 +78,4 @@ class FakeCheckoutService {
         // then add them up
         .reduce((value, element) => value + element);
   }
-}
-
-@riverpod
-FakeCheckoutService checkoutService(CheckoutServiceRef ref) {
-  return FakeCheckoutService(
-    authRepository: ref.watch(authRepositoryProvider),
-    remoteCartRepository: ref.watch(remoteCartRepositoryProvider),
-    fakeOrdersRepository: ref.watch(ordersRepositoryProvider),
-    fakeProducsRepository: ref.watch(productsRepositoryProvider),
-    currentDateBuilder: () => DateTime.now(),
-  );
 }
