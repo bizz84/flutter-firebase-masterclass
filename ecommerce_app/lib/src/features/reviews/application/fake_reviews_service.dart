@@ -1,23 +1,25 @@
-import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
+import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
 import 'package:ecommerce_app/src/features/products/data/fake_products_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
-import 'package:ecommerce_app/src/features/reviews/data/fake_reviews_repository.dart';
+import 'package:ecommerce_app/src/features/reviews/application/reviews_service.dart';
+import 'package:ecommerce_app/src/features/reviews/data/reviews_repository.dart';
 import 'package:ecommerce_app/src/features/reviews/domain/review.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'fake_reviews_service.g.dart';
-
-class FakeReviewsService {
+class FakeReviewsService implements ReviewsService {
   const FakeReviewsService({
     required this.fakeProductsRepository,
     required this.authRepository,
     required this.reviewsRepository,
   });
+  // * since this is a "fake" reviews service, it relies on some methods that
+  // * are only implemented in the [FakeProductsRepository], but not on the
+  // * [ProductsRepository] base class
   final FakeProductsRepository fakeProductsRepository;
-  final FakeAuthRepository authRepository;
-  final FakeReviewsRepository reviewsRepository;
+  final AuthRepository authRepository;
+  final ReviewsRepository reviewsRepository;
 
+  @override
   Future<void> submitReview({
     required ProductID productId,
     required Review review,
@@ -64,40 +66,5 @@ class FakeReviewsService {
     } else {
       return 0.0;
     }
-  }
-}
-
-@riverpod
-FakeReviewsService reviewsService(ReviewsServiceRef ref) {
-  return FakeReviewsService(
-    fakeProductsRepository: ref.watch(productsRepositoryProvider),
-    authRepository: ref.watch(authRepositoryProvider),
-    reviewsRepository: ref.watch(reviewsRepositoryProvider),
-  );
-}
-
-/// Check if a product was previously reviewed by the user
-@riverpod
-Future<Review?> userReviewFuture(UserReviewFutureRef ref, ProductID productId) {
-  final user = ref.watch(authStateChangesProvider).value;
-  if (user != null) {
-    return ref
-        .watch(reviewsRepositoryProvider)
-        .fetchUserReview(productId, user.uid);
-  } else {
-    return Future.value(null);
-  }
-}
-
-/// Check if a product was previously reviewed by the user
-@riverpod
-Stream<Review?> userReviewStream(UserReviewStreamRef ref, ProductID productId) {
-  final user = ref.watch(authStateChangesProvider).value;
-  if (user != null) {
-    return ref
-        .watch(reviewsRepositoryProvider)
-        .watchUserReview(productId, user.uid);
-  } else {
-    return Stream.value(null);
   }
 }
