@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
-import 'package:ecommerce_app/src/features/orders/data/fake_orders_repository.dart';
+import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
+import 'package:ecommerce_app/src/features/orders/data/orders_repository.dart';
 import 'package:ecommerce_app/src/features/orders/domain/order.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
