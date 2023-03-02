@@ -20,6 +20,9 @@ class FakeCheckoutService implements CheckoutService {
   });
   final AuthRepository authRepository;
   final RemoteCartRepository remoteCartRepository;
+  // * since this is a "fake" checkout service, it relies on some methods that
+  // * are only implemented in the [FakeOrdersRepository]
+  // * and [FakeProductsRepository], but not on their base classes
   final FakeOrdersRepository fakeOrdersRepository;
   final FakeProductsRepository fakeProducsRepository;
   final DateTime Function() currentDateBuilder;

@@ -12,6 +12,9 @@ class FakeReviewsService implements ReviewsService {
     required this.authRepository,
     required this.reviewsRepository,
   });
+  // * since this is a "fake" reviews service, it relies on some methods that
+  // * are only implemented in the [FakeProductsRepository], but not on the
+  // * [ProductsRepository] base class
   final FakeProductsRepository fakeProductsRepository;
   final AuthRepository authRepository;
   final ReviewsRepository reviewsRepository;
