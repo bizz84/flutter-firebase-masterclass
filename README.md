@@ -49,4 +49,10 @@ cd ecommerce_app
 flutterfire configure
 ```
 
+## Documentation site
+
+A documentation site with useful FAQs and guides can be found here:
+
+- [Flutter & Firebase Masterclass - Documentation](https://docs.page/bizz84/flutter-firebase-masterclass/index)
+
 ### [LICENSE: MIT](LICENSE.md)
