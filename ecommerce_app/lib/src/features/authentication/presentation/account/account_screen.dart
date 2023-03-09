@@ -85,28 +85,35 @@ class AccountScreenContents extends ConsumerWidget {
   }
 }
 
-class EmailVerificationWidget extends StatelessWidget {
+class EmailVerificationWidget extends ConsumerWidget {
   const EmailVerificationWidget({super.key, required this.user});
   final AppUser user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(accountScreenControllerProvider);
     if (user.emailVerified == false) {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           OutlinedButton(
+            onPressed: state.isLoading
+                ? null
+                : () async {
+                    final success = await ref
+                        .read(accountScreenControllerProvider.notifier)
+                        .sendEmailVerification(user);
+                    if (success && context.mounted) {
+                      showAlertDialog(
+                        context: context,
+                        title: 'Sent - now check your email'.hardcoded,
+                      );
+                    }
+                  },
             child: Text(
               'Verify email'.hardcoded,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            onPressed: () {
-              // TODO: Implement
-              showAlertDialog(
-                context: context,
-                title: 'Not implemented'.hardcoded,
-              );
-            },
           ),
         ],
       );
