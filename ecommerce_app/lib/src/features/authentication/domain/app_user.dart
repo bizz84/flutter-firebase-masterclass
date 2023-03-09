@@ -9,6 +9,8 @@ class AppUser {
   final UserID uid;
   final String? email;
 
+  bool get emailVerified => false;
+
   // * Here we override methods from [Object] directly rather than using
   // * [Equatable], since this class will be subclassed or implemented
   // * by other classes.

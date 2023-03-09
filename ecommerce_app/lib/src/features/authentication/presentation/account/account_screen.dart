@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/src/common_widgets/alert_dialogs.dart';
 import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
+import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
 import 'package:ecommerce_app/src/features/authentication/presentation/account/account_screen_controller.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
 import 'package:ecommerce_app/src/utils/async_value_ui.dart';
@@ -77,7 +78,54 @@ class AccountScreenContents extends ConsumerWidget {
           user.email ?? '',
           style: Theme.of(context).textTheme.titleMedium,
         ),
+        gapH16,
+        EmailVerificationWidget(user: user),
       ],
     );
+  }
+}
+
+class EmailVerificationWidget extends StatelessWidget {
+  const EmailVerificationWidget({super.key, required this.user});
+  final AppUser user;
+
+  @override
+  Widget build(BuildContext context) {
+    if (user.emailVerified == false) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          OutlinedButton(
+            child: Text(
+              'Verify email'.hardcoded,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            onPressed: () {
+              // TODO: Implement
+              showAlertDialog(
+                context: context,
+                title: 'Not implemented'.hardcoded,
+              );
+            },
+          ),
+        ],
+      );
+    } else {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Verified'.hardcoded,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: Colors.green.shade700),
+          ),
+          gapW8,
+          Icon(Icons.check_circle, color: Colors.green.shade700),
+        ],
+      );
+    }
   }
 }
