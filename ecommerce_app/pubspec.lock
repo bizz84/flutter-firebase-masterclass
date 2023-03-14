@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "55.0.0"
+  _flutterfire_internals:
+    dependency: transitive
+    description:
+      name: _flutterfire_internals
+      sha256: cb3a948a1eebbf8efd987c43f95418269930e912a88bc7b6a5a7658423133635
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.17"
   analyzer:
     dependency: transitive
     description:
@@ -289,6 +297,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  firebase_auth:
+    dependency: "direct main"
+    description:
+      name: firebase_auth
+      sha256: "7f2124b9a3573099aaaaab8d6157032725d7e45593be0b80ab3b8ddeb7051c42"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.10"
+  firebase_auth_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_auth_platform_interface
+      sha256: "98e4a414db0e083a2cb8a24735bb57ef3a1ee40a1407a93513391b24ad6ffd5d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.11.12"
+  firebase_auth_web:
+    dependency: transitive
+    description:
+      name: firebase_auth_web
+      sha256: c6c559fd885e35d6256a4c4ad54c45bdce41cc275fbb7e735ee860095e854cbf
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.9"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      sha256: "1c121a478af23755b0b93fd4aa70d3bd32a587dd51ef0a3979091ac0d2317d32"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.1"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      sha256: "5615b30c36f55b2777d0533771deda7e5730e769e5d3cb7fda79e9bed86cfa55"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.3"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      sha256: "0c1cf1f1022d2245ac117443bb95207952ca770281524d2908e323bc063fb8ff"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
   fixnum:
     dependency: transitive
     description:
