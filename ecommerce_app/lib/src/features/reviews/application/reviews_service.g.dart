@@ -186,7 +186,7 @@ class _UserReviewFutureProviderElement
   String get productId => (origin as UserReviewFutureProvider).productId;
 }
 
-String _$userReviewStreamHash() => r'929c44de465ca195cb9f12203943b7bb4bdfda26';
+String _$userReviewStreamHash() => r'a2ba31997d0122483ae686b9942cb555c69801f7';
 
 /// Check if a product was previously reviewed by the user
 ///

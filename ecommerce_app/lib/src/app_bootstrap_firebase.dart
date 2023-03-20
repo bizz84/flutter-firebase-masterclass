@@ -6,8 +6,6 @@ import 'package:ecommerce_app/src/features/cart/data/remote/fake_remote_cart_rep
 import 'package:ecommerce_app/src/features/cart/data/remote/remote_cart_repository.dart';
 import 'package:ecommerce_app/src/features/orders/data/fake_orders_repository.dart';
 import 'package:ecommerce_app/src/features/orders/data/orders_repository.dart';
-import 'package:ecommerce_app/src/features/products/data/fake_products_repository.dart';
-import 'package:ecommerce_app/src/features/products/data/products_repository.dart';
 import 'package:ecommerce_app/src/features/reviews/data/fake_reviews_repository.dart';
 import 'package:ecommerce_app/src/features/reviews/data/reviews_repository.dart';
 
@@ -32,7 +30,6 @@ import 'package:ecommerce_app/src/features/reviews/data/reviews_repository.dart'
 Future<ProviderContainer> createFirebaseProviderContainer(
     {bool addDelay = true}) async {
   // TODO: Replace with Firebase repositories
-  final productsRepository = FakeProductsRepository(addDelay: addDelay);
   final reviewsRepository = FakeReviewsRepository(addDelay: addDelay);
   // * set delay to false to make it easier to add/remove items
   final localCartRepository = FakeLocalCartRepository(addDelay: false);
@@ -42,7 +39,6 @@ Future<ProviderContainer> createFirebaseProviderContainer(
   return ProviderContainer(
     overrides: [
       // repositories
-      productsRepositoryProvider.overrideWithValue(productsRepository),
       reviewsRepositoryProvider.overrideWithValue(reviewsRepository),
       ordersRepositoryProvider.overrideWithValue(ordersRepository),
       localCartRepositoryProvider.overrideWithValue(localCartRepository),
