@@ -26,6 +26,8 @@ dependencies:
   cached_network_image: 3.3.0
   firebase_core: 2.22.0
   firebase_auth: 4.14.0
+  cloud_firestore: 4.13.1
+  firebase_storage: 11.5.1
 
 dev_dependencies:
   flutter_test:
