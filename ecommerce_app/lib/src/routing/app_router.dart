@@ -7,6 +7,10 @@ import 'package:ecommerce_app/src/features/checkout/presentation/checkout_screen
 import 'package:ecommerce_app/src/features/orders/presentation/orders_list/orders_list_screen.dart';
 import 'package:ecommerce_app/src/features/products/presentation/product_screen/product_screen.dart';
 import 'package:ecommerce_app/src/features/products/presentation/products_list/products_list_screen.dart';
+import 'package:ecommerce_app/src/features/products_admin/presentation/admin_product_edit_screen.dart';
+import 'package:ecommerce_app/src/features/products_admin/presentation/admin_product_upload_screen.dart';
+import 'package:ecommerce_app/src/features/products_admin/presentation/admin_products_add_screen.dart';
+import 'package:ecommerce_app/src/features/products_admin/presentation/admin_products_screen.dart';
 import 'package:ecommerce_app/src/features/reviews/presentation/leave_review_screen/leave_review_screen.dart';
 import 'package:ecommerce_app/src/routing/go_router_refresh_stream.dart';
 import 'package:ecommerce_app/src/routing/not_found_screen.dart';
@@ -28,6 +32,10 @@ enum AppRoute {
   orders,
   account,
   signIn,
+  admin,
+  adminAdd,
+  adminUploadProduct,
+  adminEditProduct,
 }
 
 /// returns the GoRouter instance that defines all the routes in the app
@@ -122,6 +130,45 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 formType: EmailPasswordSignInFormType.signIn,
               ),
             ),
+          ),
+          GoRoute(
+            path: 'admin',
+            name: AppRoute.admin.name,
+            pageBuilder: (context, state) => const MaterialPage(
+              fullscreenDialog: true,
+              child: AdminProductsScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: 'add',
+                name: AppRoute.adminAdd.name,
+                pageBuilder: (context, state) => const MaterialPage(
+                  fullscreenDialog: true,
+                  child: AdminProductsAddScreen(),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    name: AppRoute.adminUploadProduct.name,
+                    builder: (context, state) {
+                      final productId = state.pathParameters['id']!;
+                      return AdminProductUploadScreen(productId: productId);
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'edit/:id',
+                name: AppRoute.adminEditProduct.name,
+                pageBuilder: (context, state) {
+                  final productId = state.pathParameters['id']!;
+                  return MaterialPage(
+                    fullscreenDialog: true,
+                    child: AdminProductEditScreen(productId: productId),
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),

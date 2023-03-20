@@ -21,6 +21,8 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authStateChangesProvider).value;
+    // TODO: Add role-based authorization
+    final isAdminUser = user != null;
     // * This widget is responsive.
     // * On large screen sizes, it shows all the actions in the app bar.
     // * On small screen sizes, it shows only the shopping cart icon and a
@@ -34,7 +36,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
         title: Text('My Shop'.hardcoded),
         actions: [
           const ShoppingCartIcon(),
-          MoreMenuButton(user: user),
+          MoreMenuButton(user: user, isAdminUser: isAdminUser),
         ],
       );
     } else {
@@ -58,6 +60,12 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
               key: MoreMenuButton.signInKey,
               text: 'Sign In'.hardcoded,
               onPressed: () => context.pushNamed(AppRoute.signIn.name),
+            ),
+          if (isAdminUser)
+            ActionTextButton(
+              key: MoreMenuButton.adminKey,
+              text: 'Admin'.hardcoded,
+              onPressed: () => context.pushNamed(AppRoute.admin.name),
             ),
         ],
       );
