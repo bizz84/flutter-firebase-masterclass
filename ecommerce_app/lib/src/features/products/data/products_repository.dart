@@ -10,39 +10,28 @@ class ProductsRepository {
   const ProductsRepository(this._firestore);
   final FirebaseFirestore _firestore;
 
-  // TODO: Implement all methods using Cloud Firestore
+  static String productsPath() => 'products';
+  static String productPath(ProductID id) => 'products/$id';
+
   Future<List<Product>> fetchProductsList() async {
-    final ref = _firestore.collection('products').withConverter(
-          fromFirestore: (doc, _) => Product.fromMap(doc.data()!),
-          toFirestore: (product, _) => product.toMap(),
-        );
+    final ref = _productsRef();
     final snapshot = await ref.get();
     return snapshot.docs.map((docSnapshot) => docSnapshot.data()).toList();
   }
 
   Stream<List<Product>> watchProductsList() {
-    final ref = _firestore.collection('products').withConverter(
-          fromFirestore: (doc, _) => Product.fromMap(doc.data()!),
-          toFirestore: (product, _) => product.toMap(),
-        );
+    final ref = _productsRef();
     return ref.snapshots().map((snapshot) =>
         snapshot.docs.map((docSnapshot) => docSnapshot.data()).toList());
   }
 
   Stream<Product?> watchProduct(ProductID id) {
-    final ref = _firestore.doc('products/$id').withConverter(
-          fromFirestore: (doc, _) => Product.fromMap(doc.data()!),
-          toFirestore: (product, _) => product.toMap(),
-        );
+    final ref = _productRef(id);
     return ref.snapshots().map((snapshot) => snapshot.data());
   }
 
-  Future<List<Product>> searchProducts(String query) {
-    return Future.value([]);
-  }
-
   Future<void> createProduct(ProductID id, String imageUrl) {
-    return _firestore.doc('products/$id').set(
+    return _firestore.doc(productPath(id)).set(
       {
         'id': id,
         'imageUrl': imageUrl,
@@ -50,6 +39,34 @@ class ProductsRepository {
       // use merge: true to keep old fields (if any)
       SetOptions(merge: true),
     );
+  }
+
+  DocumentReference<Product> _productRef(ProductID id) =>
+      _firestore.doc(productPath(id)).withConverter(
+            fromFirestore: (doc, _) => Product.fromMap(doc.data()!),
+            toFirestore: (Product product, options) => product.toMap(),
+          );
+
+  Query<Product> _productsRef() => _firestore
+      .collection(productsPath())
+      .withConverter(
+        fromFirestore: (doc, _) => Product.fromMap(doc.data()!),
+        toFirestore: (Product product, options) => product.toMap(),
+      )
+      .orderBy('id');
+
+  // * Temporary search implementation.
+  // * Note: this is quite inefficient as it pulls the entire product list
+  // * and then filters the data on the client
+  // TODO: Update
+  Future<List<Product>> searchProducts(String query) async {
+    // 1. Get all products from Firestore
+    final productsList = await fetchProductsList();
+    // 2. Perform client-side filtering
+    return productsList
+        .where((product) =>
+            product.title.toLowerCase().contains(query.toLowerCase()))
+        .toList();
   }
 }
 
