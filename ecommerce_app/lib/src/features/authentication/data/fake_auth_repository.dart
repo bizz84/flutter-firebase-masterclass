@@ -13,6 +13,8 @@ class FakeAuthRepository implements AuthRepository {
   @override
   Stream<AppUser?> authStateChanges() => _authState.stream;
   @override
+  Stream<AppUser?> idTokenChanges() => _authState.stream;
+  @override
   AppUser? get currentUser => _authState.value;
 
   // List to keep track of all user accounts

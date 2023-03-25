@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/src/common_widgets/alert_dialogs.dart';
+import 'package:ecommerce_app/src/common_widgets/custom_text_button.dart';
 import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
 import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
 import 'package:ecommerce_app/src/features/authentication/presentation/account/account_screen_controller.dart';
@@ -61,7 +62,7 @@ class AccountScreenContents extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(authStateChangesProvider).value;
+    final user = ref.watch(idTokenChangesProvider).value;
     if (user == null) {
       return const SizedBox.shrink();
     }
@@ -96,24 +97,33 @@ class EmailVerificationWidget extends ConsumerWidget {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          OutlinedButton(
-            onPressed: state.isLoading
-                ? null
-                : () async {
-                    final success = await ref
-                        .read(accountScreenControllerProvider.notifier)
-                        .sendEmailVerification(user);
-                    if (success && context.mounted) {
-                      showAlertDialog(
-                        context: context,
-                        title: 'Sent - now check your email'.hardcoded,
-                      );
-                    }
-                  },
-            child: Text(
-              'Verify email'.hardcoded,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+          Column(
+            children: [
+              OutlinedButton(
+                onPressed: state.isLoading
+                    ? null
+                    : () async {
+                        final success = await ref
+                            .read(accountScreenControllerProvider.notifier)
+                            .sendEmailVerification(user);
+                        if (success && context.mounted) {
+                          showAlertDialog(
+                            context: context,
+                            title: 'Sent - now check your email'.hardcoded,
+                          );
+                        }
+                      },
+                child: Text(
+                  'Verify email'.hardcoded,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+              const SizedBox(height: Sizes.p8),
+              CustomTextButton(
+                text: 'Reload'.hardcoded,
+                onPressed: () => user.reload(),
+              ),
+            ],
           ),
         ],
       );

@@ -19,4 +19,7 @@ class FirebaseAppUser implements AppUser {
   // * Read this for more info: https://stackoverflow.com/a/63258198/436422
   @override
   Future<void> sendEmailVerification() => _user.sendEmailVerification();
+
+  @override
+  Future<void> reload() => _user.reload();
 }

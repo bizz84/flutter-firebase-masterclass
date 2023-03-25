@@ -33,6 +33,10 @@ class AuthRepository {
     return _auth.authStateChanges().map(_convertUser);
   }
 
+  Stream<AppUser?> idTokenChanges() {
+    return _auth.idTokenChanges().map(_convertUser);
+  }
+
   AppUser? get currentUser => _convertUser(_auth.currentUser);
 
   /// Helper method to convert a [User] to an [AppUser]
@@ -51,4 +55,10 @@ AuthRepository authRepository(AuthRepositoryRef ref) {
 Stream<AppUser?> authStateChanges(AuthStateChangesRef ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return authRepository.authStateChanges();
+}
+
+@Riverpod(keepAlive: true)
+Stream<AppUser?> idTokenChanges(IdTokenChangesRef ref) {
+  final authRepository = ref.watch(authRepositoryProvider);
+  return authRepository.idTokenChanges();
 }
