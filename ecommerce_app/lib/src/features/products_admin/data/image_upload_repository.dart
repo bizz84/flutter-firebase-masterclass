@@ -13,8 +13,18 @@ class ImageUploadRepository {
   /// Upload an image asset to Firebase Storage and returns the download URL
   Future<String> uploadProductImageFromAsset(
       String assetPath, ProductID productId) async {
-    // TODO: Implement
-    throw UnimplementedError();
+    // load asset byte data from bundle
+    final byteData = await rootBundle.load(assetPath);
+
+    // Extract filename
+    // Example name: assets/products/bruschetta-plate.jpg
+    final components = assetPath.split('/');
+    final filename = components[2];
+    // upload to Firebase Storage
+    final result = await _uploadAsset(byteData, filename);
+
+    // return download URL
+    return result.ref.getDownloadURL();
   }
 
   UploadTask _uploadAsset(ByteData byteData, String filename) {
