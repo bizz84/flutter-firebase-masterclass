@@ -20,7 +20,11 @@ class ProductsRepository {
   }
 
   Stream<Product?> watchProduct(ProductID id) {
-    return Stream.value(null);
+    final ref = _firestore.doc('products/$id').withConverter(
+          fromFirestore: (doc, _) => Product.fromMap(doc.data()!),
+          toFirestore: (product, _) => product.toMap(),
+        );
+    return ref.snapshots().map((snapshot) => snapshot.data());
   }
 
   Future<List<Product>> searchProducts(String query) {
