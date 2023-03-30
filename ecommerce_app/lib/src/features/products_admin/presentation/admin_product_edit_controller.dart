@@ -2,14 +2,17 @@ import 'package:ecommerce_app/src/features/products/data/products_repository.dar
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/features/products_admin/application/image_upload_service.dart';
 import 'package:ecommerce_app/src/routing/app_router.dart';
+import 'package:ecommerce_app/src/utils/notifier_mounted.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'admin_product_edit_controller.g.dart';
 
 @riverpod
-class AdminProductEditController extends _$AdminProductEditController {
+class AdminProductEditController extends _$AdminProductEditController
+    with NotifierMounted {
   @override
   FutureOr<void> build() {
+    ref.onDispose(setUnmounted);
     // no-op
   }
 
@@ -32,12 +35,15 @@ class AdminProductEditController extends _$AdminProductEditController {
       availableQuantity: availableQuantityValue,
     );
     state = const AsyncLoading();
-    state = await AsyncValue.guard(
+    final value = await AsyncValue.guard(
         () => productsRepository.updateProduct(updatedProduct));
-    final success = state.hasError == false;
-    if (success) {
-      // on success, go back to previous screen
-      ref.read(goRouterProvider).pop();
+    final success = value.hasError == false;
+    if (mounted) {
+      state = value;
+      if (success) {
+        // on success, go back to previous screen
+        ref.read(goRouterProvider).pop();
+      }
     }
     return success;
   }
@@ -48,9 +54,12 @@ class AdminProductEditController extends _$AdminProductEditController {
     final value =
         await AsyncValue.guard(() => imageUploadService.deleteProduct(product));
     final success = value.hasError == false;
-    if (success) {
-      // on success, go back to previous screen
-      ref.read(goRouterProvider).pop();
+    if (mounted) {
+      state = value;
+      if (success) {
+        // on success, go back to previous screen
+        ref.read(goRouterProvider).pop();
+      }
     }
   }
 }

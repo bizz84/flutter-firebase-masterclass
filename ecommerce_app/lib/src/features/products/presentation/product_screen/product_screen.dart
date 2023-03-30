@@ -27,7 +27,7 @@ class ProductScreen extends StatelessWidget {
       appBar: const HomeAppBar(),
       body: Consumer(
         builder: (context, ref, _) {
-          final productValue = ref.watch(productProvider(productId));
+          final productValue = ref.watch(productStreamProvider(productId));
           return AsyncValueWidget<Product?>(
             value: productValue,
             data: (product) => product == null
@@ -75,7 +75,8 @@ class ProductDetails extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(product.title, style: Theme.of(context).textTheme.titleLarge),
+              Text(product.title,
+                  style: Theme.of(context).textTheme.titleLarge),
               gapH8,
               Text(product.description),
               // Only show average if there is at least one rating
