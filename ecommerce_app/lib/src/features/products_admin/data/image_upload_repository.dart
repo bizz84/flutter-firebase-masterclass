@@ -37,6 +37,11 @@ class ImageUploadRepository {
       SettableMetadata(contentType: 'image/jpeg'),
     );
   }
+
+  /// Delete the product image from Firebase storage
+  Future<void> deleteProductImage(String imageUrl) {
+    return _storage.refFromURL(imageUrl).delete();
+  }
 }
 
 @riverpod
