@@ -27,7 +27,7 @@ final templateProductsRepositoryProvider =
 typedef TemplateProductsRepositoryRef
     = AutoDisposeProviderRef<ProductsRepository>;
 String _$templateProductsListHash() =>
-    r'05c32fd02bf7d0eb20b1358cd04a2475e7e39731';
+    r'efc2722109517442166cb9f05e918bb312859df7';
 
 /// * A [StreamProvider] to return only the template products to be shown in the
 /// * [AdminProductsAddScreen] widget

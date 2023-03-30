@@ -32,7 +32,7 @@ class ShoppingCartItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productValue = ref.watch(productProvider(item.productId));
+    final productValue = ref.watch(productStreamProvider(item.productId));
     return AsyncValueWidget<Product?>(
       value: productValue,
       data: (product) => Padding(
@@ -85,7 +85,8 @@ class ShoppingCartItemContents extends ConsumerWidget {
         children: [
           Text(product.title, style: Theme.of(context).textTheme.headlineSmall),
           gapH24,
-          Text(priceFormatted, style: Theme.of(context).textTheme.headlineSmall),
+          Text(priceFormatted,
+              style: Theme.of(context).textTheme.headlineSmall),
           gapH24,
           isEditable
               // show the quantity selector and a delete button
