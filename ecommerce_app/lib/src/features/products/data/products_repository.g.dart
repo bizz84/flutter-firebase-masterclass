@@ -56,7 +56,7 @@ final productsListFutureProvider =
 );
 
 typedef ProductsListFutureRef = AutoDisposeFutureProviderRef<List<Product>>;
-String _$productHash() => r'5a13397cd9ecf77474aef18035961240f3400e67';
+String _$productStreamHash() => r'ca05835175ed8380c860c10fae540144f62093d5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -79,29 +79,29 @@ class _SystemHash {
   }
 }
 
-typedef ProductRef = AutoDisposeStreamProviderRef<Product?>;
+typedef ProductStreamRef = AutoDisposeStreamProviderRef<Product?>;
 
-/// See also [product].
-@ProviderFor(product)
-const productProvider = ProductFamily();
+/// See also [productStream].
+@ProviderFor(productStream)
+const productStreamProvider = ProductStreamFamily();
 
-/// See also [product].
-class ProductFamily extends Family<AsyncValue<Product?>> {
-  /// See also [product].
-  const ProductFamily();
+/// See also [productStream].
+class ProductStreamFamily extends Family<AsyncValue<Product?>> {
+  /// See also [productStream].
+  const ProductStreamFamily();
 
-  /// See also [product].
-  ProductProvider call(
+  /// See also [productStream].
+  ProductStreamProvider call(
     String id,
   ) {
-    return ProductProvider(
+    return ProductStreamProvider(
       id,
     );
   }
 
   @override
-  ProductProvider getProviderOverride(
-    covariant ProductProvider provider,
+  ProductStreamProvider getProviderOverride(
+    covariant ProductStreamProvider provider,
   ) {
     return call(
       provider.id,
@@ -120,34 +120,117 @@ class ProductFamily extends Family<AsyncValue<Product?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'productProvider';
+  String? get name => r'productStreamProvider';
 }
 
-/// See also [product].
-class ProductProvider extends AutoDisposeStreamProvider<Product?> {
-  /// See also [product].
-  ProductProvider(
+/// See also [productStream].
+class ProductStreamProvider extends AutoDisposeStreamProvider<Product?> {
+  /// See also [productStream].
+  ProductStreamProvider(
     this.id,
   ) : super.internal(
-          (ref) => product(
+          (ref) => productStream(
             ref,
             id,
           ),
-          from: productProvider,
-          name: r'productProvider',
+          from: productStreamProvider,
+          name: r'productStreamProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$productHash,
-          dependencies: ProductFamily._dependencies,
-          allTransitiveDependencies: ProductFamily._allTransitiveDependencies,
+                  : _$productStreamHash,
+          dependencies: ProductStreamFamily._dependencies,
+          allTransitiveDependencies:
+              ProductStreamFamily._allTransitiveDependencies,
         );
 
   final String id;
 
   @override
   bool operator ==(Object other) {
-    return other is ProductProvider && other.id == id;
+    return other is ProductStreamProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$productFutureHash() => r'882ff9553d805c3f9d5e6cc7666d3201ca4d3403';
+typedef ProductFutureRef = AutoDisposeFutureProviderRef<Product?>;
+
+/// See also [productFuture].
+@ProviderFor(productFuture)
+const productFutureProvider = ProductFutureFamily();
+
+/// See also [productFuture].
+class ProductFutureFamily extends Family<AsyncValue<Product?>> {
+  /// See also [productFuture].
+  const ProductFutureFamily();
+
+  /// See also [productFuture].
+  ProductFutureProvider call(
+    String id,
+  ) {
+    return ProductFutureProvider(
+      id,
+    );
+  }
+
+  @override
+  ProductFutureProvider getProviderOverride(
+    covariant ProductFutureProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'productFutureProvider';
+}
+
+/// See also [productFuture].
+class ProductFutureProvider extends AutoDisposeFutureProvider<Product?> {
+  /// See also [productFuture].
+  ProductFutureProvider(
+    this.id,
+  ) : super.internal(
+          (ref) => productFuture(
+            ref,
+            id,
+          ),
+          from: productFutureProvider,
+          name: r'productFutureProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$productFutureHash,
+          dependencies: ProductFutureFamily._dependencies,
+          allTransitiveDependencies:
+              ProductFutureFamily._allTransitiveDependencies,
+        );
+
+  final String id;
+
+  @override
+  bool operator ==(Object other) {
+    return other is ProductFutureProvider && other.id == id;
   }
 
   @override

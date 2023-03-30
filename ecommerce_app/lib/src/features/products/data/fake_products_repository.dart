@@ -34,6 +34,12 @@ class FakeProductsRepository implements ProductsRepository {
 
   // Retrieve a specific product by ID
   @override
+  Future<Product?> fetchProduct(String id) {
+    return Future.value(_getProduct(_products.value, id));
+  }
+
+  // Retrieve a specific product by ID
+  @override
   Stream<Product?> watchProduct(String id) {
     return watchProductsList().map((products) => _getProduct(products, id));
   }
