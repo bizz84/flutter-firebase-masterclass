@@ -24,7 +24,10 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HomeAppBar(),
+      appBar: PreferredSize(
+        preferredSize: HomeAppBar.preferredSize,
+        child: const HomeAppBar(),
+      ),
       body: Consumer(
         builder: (context, ref, _) {
           final productValue = ref.watch(productProvider(productId));
