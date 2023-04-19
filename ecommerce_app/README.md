@@ -10,13 +10,22 @@ This will include a full-stack eCommerce app using Flutter & Firebase:
 
 ## Project Setup
 
-At the beginning of each section (and other points in the course), I'll share an updated starter project with all the latest code.
-
-Each starter project can be checked out from a **specific branch name**, as instructed in the relevant lessons:
+To clone the repo for the first time and open it in VSCode, run this:
 
 ```
 git clone https://github.com/bizz84/flutter-firebase-masterclass.git
 cd flutter-firebase-masterclass
+code .
+```
+
+This will checkout the `main` branch which contains the **latest code**.
+
+But at various points in the course, I'll ask you to checkout a **specific branch name**, so you can follow along with the right code, at the right time.
+
+And to prevent any conflicts, you may need to reset your local changes:
+
+```
+git reset --hard HEAD
 git checkout <branch-name>
 ```
 
