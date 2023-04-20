@@ -12,16 +12,17 @@ class ShoppingCartScreenController extends _$ShoppingCartScreenController {
     // nothing to do
   }
 
-  CartService get cartService => ref.read(cartServiceProvider);
+  CartService get _cartService => ref.read(cartServiceProvider);
 
   Future<void> updateItemQuantity(ProductID productId, int quantity) async {
     state = const AsyncLoading();
     final updated = Item(productId: productId, quantity: quantity);
-    state = await AsyncValue.guard(() => cartService.setItem(updated));
+    state = await AsyncValue.guard(() => _cartService.setItem(updated));
   }
 
   Future<void> removeItemById(ProductID productId) async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() => cartService.removeItemById(productId));
+    state =
+        await AsyncValue.guard(() => _cartService.removeItemById(productId));
   }
 }

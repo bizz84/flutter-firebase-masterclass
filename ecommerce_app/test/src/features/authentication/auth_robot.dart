@@ -29,6 +29,7 @@ class AuthRobot {
     return tester.pumpWidget(
       ProviderScope(
         overrides: [
+          // ignore: scoped_providers_should_specify_dependencies
           authRepositoryProvider.overrideWithValue(authRepository),
         ],
         child: MaterialApp(

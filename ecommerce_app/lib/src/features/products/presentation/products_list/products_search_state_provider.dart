@@ -12,7 +12,6 @@ final productsSearchQueryStateProvider = StateProvider<String>((ref) {
 
 @riverpod
 Future<List<Product>> productsSearchResults(ProductsSearchResultsRef ref) {
-  // ignore: avoid_manual_providers_as_generated_provider_depenency
   final searchQuery = ref.watch(productsSearchQueryStateProvider);
   return ref.watch(productsListSearchProvider(searchQuery).future);
 }

@@ -15,9 +15,10 @@ analyzer:
 
 custom_lint:
   rules:
-    # Explicitly disable one lint rule
+    # Project uses [UncontrolledProviderScope] so we can disable this rule
     - missing_provider_scope: false
-
+    # Disable this as we're still using old Provider for the GoRouter instance
+    - avoid_manual_providers_as_generated_provider_dependency: false
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`
