@@ -35,6 +35,10 @@
                 [
                     "The macOS deployment target ‘MACOSX_DEPLOYMENT_TARGET’ is set to 10.11, but the range of supported deployment target versions is 10.13 to 13.1.99",
                     "/faq/macos-deployment-target-issue"
+                ],
+                [
+                    "Missing file libarclite_iphoneos.a (Xcode 14.3)",
+                    "/faq/missing-file-xcode-14.3"
                 ]
             ]
         ],
