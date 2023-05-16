@@ -1,58 +1,61 @@
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
-import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'app_exception.freezed.dart';
-
-@freezed
-class AppException with _$AppException {
+sealed class AppException implements Exception {
   // Auth
-  const factory AppException.emailAlreadyInUse() = EmailAlreadyInUse;
-  const factory AppException.weakPassword() = WeakPassword;
-  const factory AppException.wrongPassword() = WrongPassword;
-  const factory AppException.userNotFound() = UserNotFound;
+  const factory AppException.emailAlreadyInUse() = _EmailAlreadyInUse;
+  const factory AppException.weakPassword() = _WeakPassword;
+  const factory AppException.wrongPassword() = _WrongPassword;
+  const factory AppException.userNotFound() = _UserNotFound;
   // Orders
   const factory AppException.parseOrderFailure(String status) =
-      ParseOrderFailure;
+      _ParseOrderFailure;
 }
 
-class AppExceptionData extends Equatable {
-  const AppExceptionData(this.code, this.message);
-  final String code;
-  final String message;
+final class _EmailAlreadyInUse implements AppException {
+  const _EmailAlreadyInUse();
+}
 
-  @override
-  List<Object?> get props => [code, message];
+final class _WeakPassword implements AppException {
+  const _WeakPassword();
+}
 
-  @override
-  bool? get stringify => true;
+final class _WrongPassword implements AppException {
+  const _WrongPassword();
+}
+
+final class _UserNotFound implements AppException {
+  const _UserNotFound();
+}
+
+final class _ParseOrderFailure implements AppException {
+  const _ParseOrderFailure(this.status);
+  final String status;
 }
 
 extension AppExceptionDetails on AppException {
-  AppExceptionData get details {
-    return when(
-      // Auth
-      emailAlreadyInUse: () => AppExceptionData(
-        'email-already-in-use',
-        'Email already in use'.hardcoded,
-      ),
-      weakPassword: () => AppExceptionData(
-        'weak-password',
-        'Password is too weak'.hardcoded,
-      ),
-      wrongPassword: () => AppExceptionData(
-        'wrong-password',
-        'Wrong password'.hardcoded,
-      ),
-      userNotFound: () => AppExceptionData(
-        'user-not-found',
-        'User not found'.hardcoded,
-      ),
+  ({String code, String message}) get details {
+    return switch (this) {
+      _EmailAlreadyInUse() => (
+          code: 'email-already-in-use',
+          message: 'Email already in use'.hardcoded,
+        ),
+      _WeakPassword() => (
+          code: 'weak-password',
+          message: 'Password is too weak'.hardcoded,
+        ),
+      _WrongPassword() => (
+          code: 'wrong-password',
+          message: 'Wrong password'.hardcoded,
+        ),
+      _UserNotFound() => (
+          code: 'user-not-found',
+          message: 'User not found'.hardcoded,
+        ),
       // Orders
-      parseOrderFailure: (status) => AppExceptionData(
-        'parse-order-failure',
-        'Could not parse order status: $status'.hardcoded,
-      ),
-    );
+      _ParseOrderFailure(status: final status) => (
+          code: 'parse-order-failure',
+          message: 'Could not parse order status: $status'.hardcoded,
+        ),
+    };
   }
 }
