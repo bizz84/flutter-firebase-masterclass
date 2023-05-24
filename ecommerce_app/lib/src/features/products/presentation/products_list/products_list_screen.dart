@@ -59,7 +59,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
           SliverProductsGrid(
             onPressed: (context, productId) => context.goNamed(
               AppRoute.product.name,
-              params: {'id': productId},
+              pathParameters: {'id': productId},
             ),
           ),
         ],

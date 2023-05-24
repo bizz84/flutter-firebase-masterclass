@@ -29,10 +29,10 @@ class FakeAuthRepository {
       }
       // same email, wrong password
       if (u.email == email && u.password != password) {
-        throw const AppException.wrongPassword();
+        throw WrongPasswordException();
       }
     }
-    throw const AppException.userNotFound();
+    throw UserNotFoundException();
   }
 
   Future<void> createUserWithEmailAndPassword(
@@ -41,12 +41,12 @@ class FakeAuthRepository {
     // check if the email is already in use
     for (final u in _users) {
       if (u.email == email) {
-        throw const AppException.emailAlreadyInUse();
+        throw EmailAlreadyInUseException();
       }
     }
     // minimum password length requirement
     if (password.length < 8) {
-      throw const AppException.userNotFound();
+      throw WeakPasswordException();
     }
     // create new user
     _createNewUser(email, password);

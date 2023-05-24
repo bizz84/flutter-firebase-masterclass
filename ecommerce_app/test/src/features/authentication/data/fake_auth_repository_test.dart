@@ -30,7 +30,7 @@ void main() {
           testEmail,
           testPassword,
         ),
-        throwsA(const AppException.userNotFound()),
+        throwsA(isA<UserNotFoundException>()),
       );
       expect(authRepository.currentUser, null);
       expect(authRepository.authStateChanges(), emits(null));

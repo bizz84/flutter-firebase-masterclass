@@ -21,7 +21,7 @@ extension AsyncValueUI on AsyncValue {
 
   String _errorMessage(Object? error) {
     if (error is AppException) {
-      return error.details.message;
+      return error.message;
     } else {
       return error.toString();
     }
