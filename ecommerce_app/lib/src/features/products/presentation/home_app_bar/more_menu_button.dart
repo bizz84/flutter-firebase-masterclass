@@ -51,13 +51,10 @@ class MoreMenuButton extends StatelessWidget {
         switch (option) {
           case PopupMenuOption.signIn:
             context.pushNamed(AppRoute.signIn.name);
-            break;
           case PopupMenuOption.orders:
             context.pushNamed(AppRoute.orders.name);
-            break;
           case PopupMenuOption.account:
             context.pushNamed(AppRoute.account.name);
-            break;
         }
       },
     );
