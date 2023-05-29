@@ -37,6 +37,10 @@
                     "/faq/macos-deployment-target-issue"
                 ],
                 [
+                    "Flutter & Firebase Auth on macOS: Resolving Common Issues",
+                    "/faq/flutter-firebase-macos-errors"
+                ],
+                [
                     "Missing file libarclite_iphoneos.a (Xcode 14.3)",
                     "/faq/missing-file-xcode-14.3"
                 ]
