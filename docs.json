@@ -77,6 +77,15 @@
             ]
         ],
         [
+            "Course Updates",
+            [
+                [
+                    "May 2023 Update",
+                    "/updates/2023-05"
+                ]
+            ]
+        ],
+        [
             "Flutter Web Demo",
             "https://my-shop-ecommerce-stg.web.app/"
         ]
