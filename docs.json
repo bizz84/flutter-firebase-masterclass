@@ -43,7 +43,15 @@
                 [
                     "Missing file libarclite_iphoneos.a (Xcode 14.3)",
                     "/faq/missing-file-xcode-14.3"
-                ]
+                ],
+                [
+                    "Unable to find a target named `RunnerTests` in project `Runner.xcodeproj`, did find `Runner`",
+                    "/faq/unable-to-find-runner-tests"
+                ],
+                [
+                    "Can't run build_runner because `BuildForInputLogger`",
+                    "/faq/cant-run-build-runner-build-runner-logger"
+                ]                
             ]
         ],
         [

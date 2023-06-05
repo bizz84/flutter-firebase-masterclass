@@ -1,0 +1,40 @@
+# Unable to find a target named `RunnerTests` in project `Runner.xcodeproj`, did find `Runner`
+
+This error can appear when first running a Flutter app **after installing any dependency that causes the Podfile to be generated** (for example, when installing the Firebase packages):
+
+- [Unable to find a target named `RunnerTests` in project `Runner.xcodeproj`](https://stackoverflow.com/questions/76247185/unable-to-find-a-target-named-runnertests-in-project-runner-xcodeproj)
+
+To resolve this, first make sure to uncomment the first line on the `Podfile`, then run `pod install`:
+
+```
+# Uncomment this line to define a global platform for your project
+platform :ios, '11.0'
+```
+
+If the error still persists, comment out the `target 'RunnerTests' do` lines below:
+
+```ruby
+target 'Runner' do
+  use_frameworks!
+  use_modular_headers!
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  # Commented out
+  #target 'RunnerTests' do
+  #  inherit! :search_paths
+  #end
+end
+```
+
+Once this is done, run `pod install` again and this time the log should look like this:
+
+```
+Ignoring ffi-1.15.4 because its extensions are not built. Try: gem pristine ffi --version 1.15.4
+Analyzing dependencies
+Downloading dependencies
+Generating Pods project
+Integrating client project
+Pod installation complete! There is 1 dependency from the Podfile and 1 total pod installed.
+
+[!] CocoaPods did not set the base configuration of your project because your project already has a custom config set. In order for CocoaPods integration to work at all, please either set the base configurations of the target `Runner` to `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` or include the `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` in your build configuration (`Flutter/Release.xcconfig`).
+```
