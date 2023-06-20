@@ -64,6 +64,10 @@
                 [
                     "Error: ADB exited with exit code 1 - Requested internal only, but not enough space",
                     "/faq/adb-exited-code-1-not-enough-space"
+                ],
+                [
+                    "Cleartext HTTP traffic not permitted (Firebase Local Emulator + Android Emulator)",
+                    "/faq/cleartext-http-traffic-not-permitted"
                 ]
             ]
         ],
