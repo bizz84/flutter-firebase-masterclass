@@ -1,0 +1,39 @@
+# Cleartext HTTP traffic not permitted (Firebase Local Emulator + Android Emulator)
+
+When signing in with Firebase Auth using the Local Emulator on Android, the following error appears:
+
+```
+I/flutter (24830): [firebase_auth/unknown] com.google.firebase.FirebaseException: An internal error has occurred. [ Cleartext HTTP traffic to 10.0.2.2 not permitted ], #0      StandardMethodCodec.decodeEnvelope
+```
+
+The solution is found in [this highly upvoted question](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted) on StackOverflow. And I've verified that option 2 in [this answer](https://stackoverflow.com/a/50834600/436422) works as intended.
+
+That is - first create the `android/app/src/main/res/xml/network_security_config.xml` file with these contents:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>
+    </domain-config>
+</network-security-config>
+```
+
+Then, add the `android:networkSecurityConfig` value to the `android/app/src/main/AndroidManifest.xml` file:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest ...>
+    <application
+        ...
+        android:networkSecurityConfig="@xml/network_security_config"
+        ...>
+        ...
+    </application>
+</manifest>
+```
+
+### Resources
+
+- [Android 8: Cleartext HTTP traffic not permitted](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
+- [How to fix 'Cleartext HTTP traffic to x not permitted'](https://stackoverflow.com/questions/58022495/how-to-fix-cleartext-http-traffic-to-x-not-permitted)
