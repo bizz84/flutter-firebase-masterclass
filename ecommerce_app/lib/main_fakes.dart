@@ -15,7 +15,7 @@ void main() async {
   // create an app bootstrap instance
   final appBootstrap = AppBootstrap();
   // create a container configured with all the "fake" repositories
-  final container = await createFakesProviderContainer();
+  final container = await appBootstrap.createFakesProviderContainer();
   // use the container above to create the root widget
   final root = appBootstrap.createRootWidget(container: container);
   // start the app
