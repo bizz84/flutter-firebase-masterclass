@@ -15,6 +15,10 @@ class AppUser {
     // no-op - implemented by subclasses
   }
 
+  Future<bool> isAdmin() {
+    return Future.value(false);
+  }
+
   // * Here we override methods from [Object] directly rather than using
   // * [Equatable], since this class will be subclassed or implemented
   // * by other classes.

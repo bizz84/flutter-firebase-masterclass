@@ -30,8 +30,16 @@ class AuthRepository {
     return _auth.signOut();
   }
 
+  /// Notifies about changes to the user's sign-in state (such as sign-in or
+  /// sign-out).
   Stream<AppUser?> authStateChanges() {
     return _auth.authStateChanges().map(_convertUser);
+  }
+
+  /// Notifies about changes to the user's sign-in state (such as sign-in or
+  /// sign-out) and also token refresh events.
+  Stream<AppUser?> idTokenChanges() {
+    return _auth.idTokenChanges().map(_convertUser);
   }
 
   AppUser? get currentUser => _convertUser(_auth.currentUser);
@@ -52,4 +60,20 @@ AuthRepository authRepository(Ref ref) {
 Stream<AppUser?> authStateChanges(Ref ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return authRepository.authStateChanges();
+}
+
+@Riverpod(keepAlive: true)
+Stream<AppUser?> idTokenChanges(Ref ref) {
+  final authRepository = ref.watch(authRepositoryProvider);
+  return authRepository.idTokenChanges();
+}
+
+@riverpod
+FutureOr<bool> isCurrentUserAdmin(Ref ref) {
+  final user = ref.watch(idTokenChangesProvider).value;
+  if (user != null) {
+    return user.isAdmin();
+  } else {
+    return false;
+  }
 }
