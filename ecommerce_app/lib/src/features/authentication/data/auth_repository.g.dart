@@ -36,4 +36,35 @@ final authStateChangesProvider = StreamProvider<AppUser?>.internal(
 );
 
 typedef AuthStateChangesRef = StreamProviderRef<AppUser?>;
+String _$idTokenChangesHash() => r'e6058ad0b90d6e10b628af4b3dbd180a67b7146e';
+
+/// See also [idTokenChanges].
+@ProviderFor(idTokenChanges)
+final idTokenChangesProvider = StreamProvider<AppUser?>.internal(
+  idTokenChanges,
+  name: r'idTokenChangesProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$idTokenChangesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef IdTokenChangesRef = StreamProviderRef<AppUser?>;
+String _$isCurrentUserAdminHash() =>
+    r'69fab3db094dff0016a615b1e8b1047beabb06c5';
+
+/// See also [isCurrentUserAdmin].
+@ProviderFor(isCurrentUserAdmin)
+final isCurrentUserAdminProvider = AutoDisposeFutureProvider<bool>.internal(
+  isCurrentUserAdmin,
+  name: r'isCurrentUserAdminProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$isCurrentUserAdminHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef IsCurrentUserAdminRef = AutoDisposeFutureProviderRef<bool>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
