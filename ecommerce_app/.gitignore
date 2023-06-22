@@ -114,12 +114,13 @@ app.*.map.json
 firebase-exports
 
 # Environment variables
-.env.dev
-.env.stg
-.env.prod
+.env
 
 # Ignore test coverage data
 coverage/lcov.info
+
+# Firebase CLI config
+.firebaserc
 
 # Firebase
 lib/firebase_options.dart
