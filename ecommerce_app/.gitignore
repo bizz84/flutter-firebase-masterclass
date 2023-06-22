@@ -121,6 +121,9 @@ firebase-exports
 # Ignore test coverage data
 coverage/lcov.info
 
+# Firebase CLI config
+.firebaserc
+
 # Firebase
 lib/firebase_options.dart
 ios/Runner/GoogleService-Info.plist
