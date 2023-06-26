@@ -4,6 +4,7 @@ import 'package:ecommerce_app/src/features/cart/application/cart_sync_service.da
 import 'package:ecommerce_app/src/features/products/presentation/home_app_bar/more_menu_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'features/authentication/auth_robot.dart';
 import 'features/cart/cart_robot.dart';
 import 'features/checkout/checkout_robot.dart';
@@ -31,6 +32,9 @@ class Robot {
   final GoldenRobot golden;
 
   Future<void> pumpMyAppWithFakes() async {
+    // ensure URL changes in the address bar when using push / pushNamed
+    // more info here: https://docs.google.com/document/d/1VCuB85D5kYxPR3qYOjVmw8boAGKb7k62heFyfFHTOvw/edit
+    GoRouter.optionURLReflectsImperativeAPIs = true;
     final container = await createFakesProviderContainer(addDelay: false);
     // * Initialize CartSyncService to start the listener
     container.read(cartSyncServiceProvider);

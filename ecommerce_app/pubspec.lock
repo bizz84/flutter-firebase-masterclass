@@ -93,10 +93,10 @@ packages:
     dependency: "direct dev"
     description:
       name: build_runner
-      sha256: "220ae4553e50d7c21a17c051afc7b183d28a24a420502e842f303f8e4e6edced"
+      sha256: "5e1929ad37d48bd382b124266cb8e521de5548d406a45a5ae6656c13dab73e37"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.4"
+    version: "2.4.5"
   build_runner_core:
     dependency: transitive
     description:
@@ -406,10 +406,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "00d1b67d6e9fa443331da229084dd3eb04407f5a2dff22940bd7bba6af5722c3"
+      sha256: "2cb236ba3f923043fdbe14a6a3a796b8c250e85658e28caee3e86c0c275847e5"
       url: "https://pub.dev"
     source: hosted
-    version: "7.1.1"
+    version: "8.2.0"
   graphs:
     dependency: transitive
     description:
@@ -763,10 +763,10 @@ packages:
     dependency: "direct main"
     description:
       name: sembast
-      sha256: a784dbcf313ff38a7f57249694c64a6bcf79f704dbec127958459a7737716830
+      sha256: da8dd3774b6001bde09378da28e94c40bd4daecde32adb44837517c12e991321
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.4"
+    version: "3.4.9"
   sembast_web:
     dependency: "direct main"
     description:
