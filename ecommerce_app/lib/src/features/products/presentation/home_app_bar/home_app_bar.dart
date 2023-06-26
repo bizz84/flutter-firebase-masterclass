@@ -15,7 +15,7 @@ import 'package:go_router/go_router.dart';
 /// - [ShoppingCartIcon]
 /// - Orders button
 /// - Account or Sign-in button
-class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
+class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
 
   @override
