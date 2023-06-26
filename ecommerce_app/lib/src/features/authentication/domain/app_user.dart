@@ -19,6 +19,10 @@ class AppUser {
     return Future.value(false);
   }
 
+  Future<void> forceRefreshIdToken() async {
+    // no-op - implemented by subclasses
+  }
+
   // * Here we override methods from [Object] directly rather than using
   // * [Equatable], since this class will be subclassed or implemented
   // * by other classes.
