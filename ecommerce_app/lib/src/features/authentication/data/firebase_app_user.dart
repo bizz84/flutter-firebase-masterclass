@@ -38,4 +38,7 @@ class FirebaseAppUser implements AppUser {
     }
     return false;
   }
+
+  @override
+  Future<void> forceRefreshIdToken() => _user.getIdToken(true);
 }
