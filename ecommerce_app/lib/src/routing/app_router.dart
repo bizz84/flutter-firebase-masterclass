@@ -45,15 +45,24 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     initialLocation: '/',
     debugLogDiagnostics: true,
     // * redirect logic based on the authentication state
-    redirect: (context, state) {
+    redirect: (context, state) async {
       final user = authRepository.currentUser;
       final isLoggedIn = user != null;
       if (isLoggedIn) {
         if (state.location == '/signIn') {
           return '/';
         }
+        final isAdmin = await user.isAdmin();
+        // prevent non-admin users to navigate to any of the admin pages
+        if (!isAdmin && state.location.startsWith('/admin')) {
+          return '/';
+        }
       } else {
         if (state.location == '/account' || state.location == '/orders') {
+          return '/';
+        }
+        // prevent non signed-in users to navigate to any of the admin pages
+        if (state.location.startsWith('/admin')) {
           return '/';
         }
       }
