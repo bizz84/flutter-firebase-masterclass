@@ -49,7 +49,7 @@ GoRouter goRouter(Ref ref) {
     initialLocation: '/',
     debugLogDiagnostics: true,
     // * redirect logic based on the authentication state
-    redirect: (context, state) {
+    redirect: (context, state) async {
       final user = authRepository.currentUser;
       final isLoggedIn = user != null;
       final path = state.uri.path;
@@ -57,8 +57,17 @@ GoRouter goRouter(Ref ref) {
         if (path == '/signIn') {
           return '/';
         }
+        final isAdmin = await user.isAdmin();
+        // prevent non-admin users to navigate to any of the admin pages
+        if (!isAdmin && path.startsWith('/admin')) {
+          return '/';
+        }
       } else {
         if (path == '/account' || path == '/orders') {
+          return '/';
+        }
+        // prevent non signed-in users to navigate to any of the admin pages
+        if (path.startsWith('/admin')) {
           return '/';
         }
       }
