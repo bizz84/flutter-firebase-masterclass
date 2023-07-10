@@ -13,7 +13,7 @@ class CustomImage extends StatelessWidget {
     // * https://flutter.dev/docs/development/platform-integration/web-images
     return AspectRatio(
       aspectRatio: 1,
-      child: imageUrl.contains("https")
+      child: imageUrl.startsWith('http')
           ? CachedNetworkImage(imageUrl: imageUrl)
           : Image.asset(imageUrl),
     );
