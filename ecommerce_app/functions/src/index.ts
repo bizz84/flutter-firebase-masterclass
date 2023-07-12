@@ -3,7 +3,7 @@ import * as functions from "firebase-functions"
 import * as logger from "firebase-functions/logger"
 import * as firestore from "@google-cloud/firestore"
 
-admin.initializeApp()
+import {lazyAdminInitializeApp} from "./init"
 
 export const makeAdminIfWhitelisted = functions.auth.user().onCreate(async (user, _) => {
   const email = user.email
@@ -24,6 +24,7 @@ export const makeAdminIfWhitelisted = functions.auth.user().onCreate(async (user
     logger.log(`${email} is already an admin`)
     return
   }
+  await lazyAdminInitializeApp()
   // set custom claim
   await admin.auth().setCustomUserClaims(user.uid, {
     admin: true,
