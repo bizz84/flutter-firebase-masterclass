@@ -25,9 +25,9 @@ void main() {
         cart: const Stream.empty(),
         products: Stream.value(kTestProducts),
       );
-      await container.read(productsListStreamProvider.future);
+      // Read the provider before the dependant providers have emitted a value
       final total = container.read(cartTotalProvider);
-      expect(total, 0);
+      expect(total, const AsyncLoading<double>());
     });
 
     test('empty cart', () async {
@@ -37,7 +37,7 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      final total = container.read(cartTotalProvider);
+      final total = await container.read(cartTotalProvider.future);
       expect(total, 0);
     });
 
@@ -48,7 +48,7 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      final total = container.read(cartTotalProvider);
+      final total = await container.read(cartTotalProvider.future);
       expect(total, 15);
     });
 
@@ -59,7 +59,7 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      final total = container.read(cartTotalProvider);
+      final total = await container.read(cartTotalProvider.future);
       expect(total, 75);
     });
 
@@ -70,7 +70,7 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      final total = container.read(cartTotalProvider);
+      final total = await container.read(cartTotalProvider.future);
       expect(total, 69); // 15 * 2 + 13 * 3
     });
 
@@ -81,7 +81,8 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      expect(() => container.read(cartTotalProvider), throwsStateError);
+      final total = await container.read(cartTotalProvider.future);
+      expect(total, 0);
     });
   });
 }

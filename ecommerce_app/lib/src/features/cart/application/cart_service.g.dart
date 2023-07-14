@@ -55,11 +55,11 @@ final cartItemsCountProvider = AutoDisposeProvider<int>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CartItemsCountRef = AutoDisposeProviderRef<int>;
-String _$cartTotalHash() => r'6d6793911f824ffa699d2d1aa904729e05de6756';
+String _$cartTotalHash() => r'fba9bbf8e4978a351336db909a37b200204524e7';
 
 /// See also [cartTotal].
 @ProviderFor(cartTotal)
-final cartTotalProvider = AutoDisposeProvider<double>.internal(
+final cartTotalProvider = AutoDisposeFutureProvider<double>.internal(
   cartTotal,
   name: r'cartTotalProvider',
   debugGetCreateSourceHash:
@@ -70,7 +70,7 @@ final cartTotalProvider = AutoDisposeProvider<double>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef CartTotalRef = AutoDisposeProviderRef<double>;
+typedef CartTotalRef = AutoDisposeFutureProviderRef<double>;
 String _$itemAvailableQuantityHash() =>
     r'7862f2c468049a37946711a9e97e8c66b35fe020';
 

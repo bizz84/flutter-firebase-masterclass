@@ -21,6 +21,7 @@ dependencies:
   flutter_riverpod: 2.6.1
   riverpod_annotation: 2.6.1
   rxdart: 0.28.0
+  collection: 1.19.1
   sembast: ^3.8.3
   sembast_web: ^2.4.0+4
   path_provider: 2.1.5
