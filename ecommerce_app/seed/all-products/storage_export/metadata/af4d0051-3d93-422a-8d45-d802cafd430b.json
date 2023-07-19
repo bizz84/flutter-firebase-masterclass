@@ -1,0 +1,19 @@
+{
+  "name": "products/piggy-blue.jpg",
+  "bucket": "flutter-firebase-masterclass.appspot.com",
+  "metageneration": 1,
+  "generation": 1689760616976,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "a056ab11-0367-4e08-9b86-4423480f6844"
+  ],
+  "etag": "CMvQOUOgfSZM4ePr4j9/4DDJabY",
+  "customMetadata": {},
+  "timeCreated": "2023-07-19T09:56:56.976Z",
+  "updated": "2023-07-19T09:56:56.976Z",
+  "size": 63159,
+  "md5Hash": "nOlRUP32uk1UhWB2nH/7ug==",
+  "crc32c": "2167253467"
+}
