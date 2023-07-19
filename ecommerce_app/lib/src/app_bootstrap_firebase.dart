@@ -55,8 +55,13 @@ extension AppBootstrapFirebase on AppBootstrap {
   }
 
   Future<void> setupEmulators() async {
-    await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
-    FirebaseFirestore.instance.useFirestoreEmulator('127.0.0.1', 8080);
-    await FirebaseStorage.instance.useStorageEmulator('127.0.0.1', 9199);
+    await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+    FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+    await FirebaseStorage.instance.useStorageEmulator('localhost', 9199);
+    // * When running on the emulator, disable persistence to avoid discrepancies
+    // * between the emulated database and local caches. More info here:
+    // * https://firebase.google.com/docs/emulator-suite/connect_firestore#instrument_your_app_to_talk_to_the_emulators
+    FirebaseFirestore.instance.settings =
+        const Settings(persistenceEnabled: false);
   }
 }
