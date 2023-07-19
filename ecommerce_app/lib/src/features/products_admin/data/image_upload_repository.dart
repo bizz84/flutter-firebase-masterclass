@@ -39,6 +39,9 @@ class ImageUploadRepository {
 
   /// Delete the product image from Firebase storage
   Future<void> deleteProductImage(String imageUrl) {
+    // * This line will throw an exception when running with the Firebase local emulator.
+    // * 'parts != null': url could not be parsed, ensure it's a valid storage url
+    // * More info here: https://github.com/firebase/flutterfire/issues/7019
     return _storage.refFromURL(imageUrl).delete();
   }
 }
