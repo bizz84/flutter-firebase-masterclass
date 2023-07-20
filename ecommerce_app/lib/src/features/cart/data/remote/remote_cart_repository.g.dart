@@ -7,7 +7,7 @@ part of 'remote_cart_repository.dart';
 // **************************************************************************
 
 String _$remoteCartRepositoryHash() =>
-    r'65a422f4a38186ad848e4f18fcf86f4a29a202c7';
+    r'7692db975fdd8e6ea509aaf8df0e756cd1c09754';
 
 /// See also [remoteCartRepository].
 @ProviderFor(remoteCartRepository)

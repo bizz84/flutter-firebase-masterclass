@@ -9,5 +9,9 @@ service cloud.firestore {
     match /metadata/{uid} {
       allow read: if request.auth.uid == uid;
     }
+    // cart
+    match /cart/{uid} {
+      allow read, write: if request.auth.uid == uid;
+    }
   }
 }
