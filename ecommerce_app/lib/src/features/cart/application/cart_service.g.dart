@@ -49,7 +49,7 @@ final cartItemsCountProvider = AutoDisposeProvider<int>.internal(
 );
 
 typedef CartItemsCountRef = AutoDisposeProviderRef<int>;
-String _$cartTotalHash() => r'036d1916096e05c2c88134d05efc5b5bcd5840e7';
+String _$cartTotalHash() => r'0834f7e0b7a288e2e847958be8919792afe6720c';
 
 /// See also [cartTotal].
 @ProviderFor(cartTotal)

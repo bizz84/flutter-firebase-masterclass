@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:collection/collection.dart';
 import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
 import 'package:ecommerce_app/src/features/cart/data/local/local_cart_repository.dart';
 import 'package:ecommerce_app/src/features/cart/data/remote/remote_cart_repository.dart';
@@ -95,12 +94,10 @@ int cartItemsCount(CartItemsCountRef ref) {
 @riverpod
 Future<double> cartTotal(CartTotalRef ref) async {
   final cart = await ref.watch(cartProvider.future);
-  final productsList = await ref.watch(productsListStreamProvider.future);
-  if (cart.items.isNotEmpty && productsList.isNotEmpty) {
+  if (cart.items.isNotEmpty) {
     var total = 0.0;
     for (final item in cart.items.entries) {
-      final product =
-          productsList.firstWhereOrNull((product) => product.id == item.key);
+      final product = await ref.watch(productStreamProvider(item.key).future);
       if (product != null) {
         total += product.price * item.value;
       }
