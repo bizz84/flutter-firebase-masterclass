@@ -44,8 +44,6 @@ class _SystemHash {
   }
 }
 
-typedef UserReviewFutureRef = AutoDisposeFutureProviderRef<Review?>;
-
 /// Check if a product was previously reviewed by the user
 ///
 /// Copied from [userReviewFuture].
@@ -104,10 +102,10 @@ class UserReviewFutureProvider extends AutoDisposeFutureProvider<Review?> {
   ///
   /// Copied from [userReviewFuture].
   UserReviewFutureProvider(
-    this.productId,
-  ) : super.internal(
+    String productId,
+  ) : this._internal(
           (ref) => userReviewFuture(
-            ref,
+            ref as UserReviewFutureRef,
             productId,
           ),
           from: userReviewFutureProvider,
@@ -119,9 +117,43 @@ class UserReviewFutureProvider extends AutoDisposeFutureProvider<Review?> {
           dependencies: UserReviewFutureFamily._dependencies,
           allTransitiveDependencies:
               UserReviewFutureFamily._allTransitiveDependencies,
+          productId: productId,
         );
 
+  UserReviewFutureProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.productId,
+  }) : super.internal();
+
   final String productId;
+
+  @override
+  Override overrideWith(
+    FutureOr<Review?> Function(UserReviewFutureRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UserReviewFutureProvider._internal(
+        (ref) => create(ref as UserReviewFutureRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        productId: productId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<Review?> createElement() {
+    return _UserReviewFutureProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -137,8 +169,20 @@ class UserReviewFutureProvider extends AutoDisposeFutureProvider<Review?> {
   }
 }
 
+mixin UserReviewFutureRef on AutoDisposeFutureProviderRef<Review?> {
+  /// The parameter `productId` of this provider.
+  String get productId;
+}
+
+class _UserReviewFutureProviderElement
+    extends AutoDisposeFutureProviderElement<Review?> with UserReviewFutureRef {
+  _UserReviewFutureProviderElement(super.provider);
+
+  @override
+  String get productId => (origin as UserReviewFutureProvider).productId;
+}
+
 String _$userReviewStreamHash() => r'929c44de465ca195cb9f12203943b7bb4bdfda26';
-typedef UserReviewStreamRef = AutoDisposeStreamProviderRef<Review?>;
 
 /// Check if a product was previously reviewed by the user
 ///
@@ -198,10 +242,10 @@ class UserReviewStreamProvider extends AutoDisposeStreamProvider<Review?> {
   ///
   /// Copied from [userReviewStream].
   UserReviewStreamProvider(
-    this.productId,
-  ) : super.internal(
+    String productId,
+  ) : this._internal(
           (ref) => userReviewStream(
-            ref,
+            ref as UserReviewStreamRef,
             productId,
           ),
           from: userReviewStreamProvider,
@@ -213,9 +257,43 @@ class UserReviewStreamProvider extends AutoDisposeStreamProvider<Review?> {
           dependencies: UserReviewStreamFamily._dependencies,
           allTransitiveDependencies:
               UserReviewStreamFamily._allTransitiveDependencies,
+          productId: productId,
         );
 
+  UserReviewStreamProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.productId,
+  }) : super.internal();
+
   final String productId;
+
+  @override
+  Override overrideWith(
+    Stream<Review?> Function(UserReviewStreamRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UserReviewStreamProvider._internal(
+        (ref) => create(ref as UserReviewStreamRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        productId: productId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<Review?> createElement() {
+    return _UserReviewStreamProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -230,4 +308,18 @@ class UserReviewStreamProvider extends AutoDisposeStreamProvider<Review?> {
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin UserReviewStreamRef on AutoDisposeStreamProviderRef<Review?> {
+  /// The parameter `productId` of this provider.
+  String get productId;
+}
+
+class _UserReviewStreamProviderElement
+    extends AutoDisposeStreamProviderElement<Review?> with UserReviewStreamRef {
+  _UserReviewStreamProviderElement(super.provider);
+
+  @override
+  String get productId => (origin as UserReviewStreamProvider).productId;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

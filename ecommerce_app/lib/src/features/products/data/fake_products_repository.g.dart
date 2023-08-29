@@ -79,8 +79,6 @@ class _SystemHash {
   }
 }
 
-typedef ProductRef = AutoDisposeStreamProviderRef<Product?>;
-
 /// See also [product].
 @ProviderFor(product)
 const productProvider = ProductFamily();
@@ -127,10 +125,10 @@ class ProductFamily extends Family<AsyncValue<Product?>> {
 class ProductProvider extends AutoDisposeStreamProvider<Product?> {
   /// See also [product].
   ProductProvider(
-    this.id,
-  ) : super.internal(
+    String id,
+  ) : this._internal(
           (ref) => product(
-            ref,
+            ref as ProductRef,
             id,
           ),
           from: productProvider,
@@ -141,9 +139,43 @@ class ProductProvider extends AutoDisposeStreamProvider<Product?> {
                   : _$productHash,
           dependencies: ProductFamily._dependencies,
           allTransitiveDependencies: ProductFamily._allTransitiveDependencies,
+          id: id,
         );
 
+  ProductProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+  }) : super.internal();
+
   final String id;
+
+  @override
+  Override overrideWith(
+    Stream<Product?> Function(ProductRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ProductProvider._internal(
+        (ref) => create(ref as ProductRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        id: id,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<Product?> createElement() {
+    return _ProductProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -159,9 +191,21 @@ class ProductProvider extends AutoDisposeStreamProvider<Product?> {
   }
 }
 
+mixin ProductRef on AutoDisposeStreamProviderRef<Product?> {
+  /// The parameter `id` of this provider.
+  String get id;
+}
+
+class _ProductProviderElement extends AutoDisposeStreamProviderElement<Product?>
+    with ProductRef {
+  _ProductProviderElement(super.provider);
+
+  @override
+  String get id => (origin as ProductProvider).id;
+}
+
 String _$productsListSearchHash() =>
     r'33cf7e75761fb69648ff1f5d116a3802291d4527';
-typedef ProductsListSearchRef = AutoDisposeFutureProviderRef<List<Product>>;
 
 /// See also [productsListSearch].
 @ProviderFor(productsListSearch)
@@ -210,10 +254,10 @@ class ProductsListSearchProvider
     extends AutoDisposeFutureProvider<List<Product>> {
   /// See also [productsListSearch].
   ProductsListSearchProvider(
-    this.query,
-  ) : super.internal(
+    String query,
+  ) : this._internal(
           (ref) => productsListSearch(
-            ref,
+            ref as ProductsListSearchRef,
             query,
           ),
           from: productsListSearchProvider,
@@ -225,9 +269,43 @@ class ProductsListSearchProvider
           dependencies: ProductsListSearchFamily._dependencies,
           allTransitiveDependencies:
               ProductsListSearchFamily._allTransitiveDependencies,
+          query: query,
         );
 
+  ProductsListSearchProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.query,
+  }) : super.internal();
+
   final String query;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<Product>> Function(ProductsListSearchRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ProductsListSearchProvider._internal(
+        (ref) => create(ref as ProductsListSearchRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        query: query,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<Product>> createElement() {
+    return _ProductsListSearchProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -242,4 +320,19 @@ class ProductsListSearchProvider
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin ProductsListSearchRef on AutoDisposeFutureProviderRef<List<Product>> {
+  /// The parameter `query` of this provider.
+  String get query;
+}
+
+class _ProductsListSearchProviderElement
+    extends AutoDisposeFutureProviderElement<List<Product>>
+    with ProductsListSearchRef {
+  _ProductsListSearchProviderElement(super.provider);
+
+  @override
+  String get query => (origin as ProductsListSearchProvider).query;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

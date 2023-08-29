@@ -44,8 +44,6 @@ class _SystemHash {
   }
 }
 
-typedef ProductReviewsRef = AutoDisposeStreamProviderRef<List<Review>>;
-
 /// See also [productReviews].
 @ProviderFor(productReviews)
 const productReviewsProvider = ProductReviewsFamily();
@@ -92,10 +90,10 @@ class ProductReviewsFamily extends Family<AsyncValue<List<Review>>> {
 class ProductReviewsProvider extends AutoDisposeStreamProvider<List<Review>> {
   /// See also [productReviews].
   ProductReviewsProvider(
-    this.productId,
-  ) : super.internal(
+    String productId,
+  ) : this._internal(
           (ref) => productReviews(
-            ref,
+            ref as ProductReviewsRef,
             productId,
           ),
           from: productReviewsProvider,
@@ -107,9 +105,43 @@ class ProductReviewsProvider extends AutoDisposeStreamProvider<List<Review>> {
           dependencies: ProductReviewsFamily._dependencies,
           allTransitiveDependencies:
               ProductReviewsFamily._allTransitiveDependencies,
+          productId: productId,
         );
 
+  ProductReviewsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.productId,
+  }) : super.internal();
+
   final String productId;
+
+  @override
+  Override overrideWith(
+    Stream<List<Review>> Function(ProductReviewsRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ProductReviewsProvider._internal(
+        (ref) => create(ref as ProductReviewsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        productId: productId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<List<Review>> createElement() {
+    return _ProductReviewsProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -124,4 +156,19 @@ class ProductReviewsProvider extends AutoDisposeStreamProvider<List<Review>> {
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin ProductReviewsRef on AutoDisposeStreamProviderRef<List<Review>> {
+  /// The parameter `productId` of this provider.
+  String get productId;
+}
+
+class _ProductReviewsProviderElement
+    extends AutoDisposeStreamProviderElement<List<Review>>
+    with ProductReviewsRef {
+  _ProductReviewsProviderElement(super.provider);
+
+  @override
+  String get productId => (origin as ProductReviewsProvider).productId;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

@@ -87,8 +87,6 @@ class _SystemHash {
   }
 }
 
-typedef ItemAvailableQuantityRef = AutoDisposeProviderRef<int>;
-
 /// See also [itemAvailableQuantity].
 @ProviderFor(itemAvailableQuantity)
 const itemAvailableQuantityProvider = ItemAvailableQuantityFamily();
@@ -135,10 +133,10 @@ class ItemAvailableQuantityFamily extends Family<int> {
 class ItemAvailableQuantityProvider extends AutoDisposeProvider<int> {
   /// See also [itemAvailableQuantity].
   ItemAvailableQuantityProvider(
-    this.product,
-  ) : super.internal(
+    Product product,
+  ) : this._internal(
           (ref) => itemAvailableQuantity(
-            ref,
+            ref as ItemAvailableQuantityRef,
             product,
           ),
           from: itemAvailableQuantityProvider,
@@ -150,9 +148,43 @@ class ItemAvailableQuantityProvider extends AutoDisposeProvider<int> {
           dependencies: ItemAvailableQuantityFamily._dependencies,
           allTransitiveDependencies:
               ItemAvailableQuantityFamily._allTransitiveDependencies,
+          product: product,
         );
 
+  ItemAvailableQuantityProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.product,
+  }) : super.internal();
+
   final Product product;
+
+  @override
+  Override overrideWith(
+    int Function(ItemAvailableQuantityRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ItemAvailableQuantityProvider._internal(
+        (ref) => create(ref as ItemAvailableQuantityRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        product: product,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<int> createElement() {
+    return _ItemAvailableQuantityProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -167,4 +199,18 @@ class ItemAvailableQuantityProvider extends AutoDisposeProvider<int> {
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin ItemAvailableQuantityRef on AutoDisposeProviderRef<int> {
+  /// The parameter `product` of this provider.
+  Product get product;
+}
+
+class _ItemAvailableQuantityProviderElement
+    extends AutoDisposeProviderElement<int> with ItemAvailableQuantityRef {
+  _ItemAvailableQuantityProviderElement(super.provider);
+
+  @override
+  Product get product => (origin as ItemAvailableQuantityProvider).product;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

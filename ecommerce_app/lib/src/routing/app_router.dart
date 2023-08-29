@@ -40,12 +40,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) async {
       final user = authRepository.currentUser;
       final isLoggedIn = user != null;
+      final path = state.uri.path;
       if (isLoggedIn) {
-        if (state.location == '/signIn') {
+        if (path == '/signIn') {
           return '/';
         }
       } else {
-        if (state.location == '/account' || state.location == '/orders') {
+        if (path == '/account' || path == '/orders') {
           return '/';
         }
       }

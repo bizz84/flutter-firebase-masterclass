@@ -47,8 +47,6 @@ class _SystemHash {
   }
 }
 
-typedef MatchingUserOrdersRef = AutoDisposeStreamProviderRef<List<Order>>;
-
 /// Check if a product was previously purchased by the user
 ///
 /// Copied from [matchingUserOrders].
@@ -108,10 +106,10 @@ class MatchingUserOrdersProvider
   ///
   /// Copied from [matchingUserOrders].
   MatchingUserOrdersProvider(
-    this.productId,
-  ) : super.internal(
+    String productId,
+  ) : this._internal(
           (ref) => matchingUserOrders(
-            ref,
+            ref as MatchingUserOrdersRef,
             productId,
           ),
           from: matchingUserOrdersProvider,
@@ -123,9 +121,43 @@ class MatchingUserOrdersProvider
           dependencies: MatchingUserOrdersFamily._dependencies,
           allTransitiveDependencies:
               MatchingUserOrdersFamily._allTransitiveDependencies,
+          productId: productId,
         );
 
+  MatchingUserOrdersProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.productId,
+  }) : super.internal();
+
   final String productId;
+
+  @override
+  Override overrideWith(
+    Stream<List<Order>> Function(MatchingUserOrdersRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: MatchingUserOrdersProvider._internal(
+        (ref) => create(ref as MatchingUserOrdersRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        productId: productId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<List<Order>> createElement() {
+    return _MatchingUserOrdersProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -140,4 +172,19 @@ class MatchingUserOrdersProvider
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin MatchingUserOrdersRef on AutoDisposeStreamProviderRef<List<Order>> {
+  /// The parameter `productId` of this provider.
+  String get productId;
+}
+
+class _MatchingUserOrdersProviderElement
+    extends AutoDisposeStreamProviderElement<List<Order>>
+    with MatchingUserOrdersRef {
+  _MatchingUserOrdersProviderElement(super.provider);
+
+  @override
+  String get productId => (origin as MatchingUserOrdersProvider).productId;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
