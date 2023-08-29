@@ -41,7 +41,7 @@ GoRouter goRouter(Ref ref) {
     initialLocation: '/',
     debugLogDiagnostics: true,
     // * redirect logic based on the authentication state
-    redirect: (context, state) async {
+    redirect: (context, state) {
       final user = authRepository.currentUser;
       final isLoggedIn = user != null;
       final path = state.uri.path;
