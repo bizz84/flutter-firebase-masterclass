@@ -29,6 +29,10 @@ dependencies:
   firebase_auth: 5.5.2
   cloud_firestore: 5.6.6
   firebase_storage: 12.4.5
+  flutter_stripe: 11.5.0
+  flutter_stripe_web: 6.5.0
+  pay: 3.2.1
+  envied: 1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -38,11 +42,11 @@ dev_dependencies:
   flutter_launcher_icons: 0.14.3
   build_runner: 2.4.15
   flutter_lints: 5.0.0
-  custom_lint: 0.7.5
-  riverpod_lint: 2.6.5
+  custom_lint: 0.7.3
+  riverpod_lint: 2.6.4
   mocktail: 1.0.4
-  riverpod_generator: 2.6.5
-
+  riverpod_generator: 2.6.4
+  envied_generator: 1.1.1
 
 # Custom app icon. For more info see: https://pub.dev/packages/flutter_launcher_icons
 flutter_icons:
