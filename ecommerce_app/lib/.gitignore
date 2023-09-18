@@ -1,0 +1,2 @@
+# Ignore generated environment variables
+env.g.dart

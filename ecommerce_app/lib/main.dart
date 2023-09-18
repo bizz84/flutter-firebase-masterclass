@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/src/app_bootstrap_firebase.dart';
+import 'package:ecommerce_app/src/app_bootstrap_stripe.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/src/app_bootstrap.dart';
@@ -20,6 +21,8 @@ void main() async {
   final appBootstrap = AppBootstrap();
   // * uncomment this to connect to the Firebase emulators
   // await appBootstrap.setupEmulators();
+  // Stripe setup
+  await appBootstrap.setupStripe();
   // create a container configured with all the Firebase repositories
   final container = await appBootstrap.createFirebaseProviderContainer();
   // use the container above to create the root widget
