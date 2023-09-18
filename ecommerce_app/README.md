@@ -49,4 +49,28 @@ cd ecommerce_app
 flutterfire configure
 ```
 
+### Stripe Setup
+
+For the Stripe code to work, a `STRIPE_PUBLISHABLE_KEY` needs to be set on the client.
+
+To set it, create an `.env` file inside the `ecommerce_app` folder and add your [Stripe publishable key](https://dashboard.stripe.com/test/apikeys):
+
+```bash
+# ecommerce_app/.env
+STRIPE_PUBLISHABLE_KEY=pk_test_YOUR_STRIPE_PUBLISHABLE_KEY
+```
+
+Then, run the generator:
+
+```bash
+dart run build_runner build -d
+```
+
+This will generate an `env.g.dart` file inside `lib`.
+
+As a result, the API key can be read as `Env.stripePublishableKey` in the Stripe setup code.
+
+> [!NOTE]
+> API keys defined with `--dart-define-from-file` were failing to load on Flutter web in release mode (see [this answer](https://stackoverflow.com/a/65647968/436422) and [this comment](https://stackoverflow.com/questions/65647090/access-dart-define-environment-variables-inside-index-html#comment120444154_65647968)). To work around that, the project now uses the [Envied](https://pub.dev/packages/envied) package.
+
 ### [LICENSE: MIT](../LICENSE.md)

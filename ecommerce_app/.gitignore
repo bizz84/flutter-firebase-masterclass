@@ -113,9 +113,6 @@ app.*.map.json
 # Firebase local emulator exports
 firebase-exports
 
-# Environment variables
-.env
-
 # Ignore test coverage data
 coverage/lcov.info
 
@@ -129,3 +126,6 @@ ios/firebase_app_id_file.json
 macos/Runner/GoogleService-Info.plist
 macos/firebase_app_id_file.json
 android/app/google-services.json
+
+## API Keys
+.env
