@@ -1,36 +1,35 @@
 import * as admin from "firebase-admin"
-import * as functions from "firebase-functions"
-import * as logger from "firebase-functions/logger"
-import * as firestore from "@google-cloud/firestore"
+import * as functionsV1 from "firebase-functions"
+import * as functionsV2 from "firebase-functions/v2"
 
 admin.initializeApp()
 
-export const makeAdminIfWhitelisted = functions.auth.user().onCreate(async (user, _) => {
-  const email = user.email
-  if (email === undefined) {
-    logger.log(`User ${user.uid} doesn't have an email address`)
-    return
-  }
-  // * disabled to make testing easier with email & password auth
-  // if (!user.emailVerified) {
-  //   logger.log(`${email} is not verified`)
-  //   return
-  // }
-  if (!email.endsWith("@codewithandrea.com")) {
-    logger.log(`${email} doesn't belong to a whitelisted domain`)
-    return
-  }
-  if (user.customClaims?.admin === true) {
-    logger.log(`${email} is already an admin`)
-    return
-  }
-  // set custom claim
-  await admin.auth().setCustomUserClaims(user.uid, {
-    admin: true,
-  })
-  // write to Firestore so the client knows it needs to update
-  await admin.firestore().doc(`metadata/${user.uid}`).set({
-    refreshTime: firestore.FieldValue.serverTimestamp(),
-  })
-  logger.log(`Custom claim set! ${email} is now an admin`)
-})
+// Admin
+import { makeAdminIfWhitelisted } from "./admin"
+
+exports.onUserCreated = functionsV1.auth.user().onCreate((user, _) => makeAdminIfWhitelisted(user))
+
+// Stripe triggers
+import {
+  onStripeProductWritten,
+  onStripePriceWritten,
+  onStripeCustomerCreated,
+} from "./stripe"
+
+// Triggered when a Stripe product is written to Firestore
+exports.onStripeProductWritten = functionsV2.firestore.onDocumentWritten(
+  "/stripe_products/{id}",
+  onStripeProductWritten,
+)
+
+// Triggered when a Stripe price is written to Firestore
+exports.onStripePriceWritten = functionsV2.firestore.onDocumentWritten(
+  "/stripe_products/{id}/prices/{priceId}",
+  onStripePriceWritten,
+)
+
+// Triggered when a Stripe customer is created
+exports.onStripeCustomerCreated = functionsV2.firestore.onDocumentCreated(
+  "/stripe_customers/{id}",
+  onStripeCustomerCreated,
+)
