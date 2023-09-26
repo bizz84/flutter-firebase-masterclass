@@ -16,15 +16,23 @@ class PaymentPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<AsyncValue<double>>(cartTotalProvider, (_, cartTotalAsync) {
-      // If the cart total becomes 0, it means that the order has been fullfilled
-      // because all the items have been removed from the cart.
-      // So we should go to the orders page.
-      cartTotalAsync.whenOrNull(data: (cartTotal) {
-        if (cartTotal == 0.0) {
-          context.goNamed(AppRoute.orders.name);
-        }
-      });
+    ref.listen<AsyncValue<Cart>>(cartProvider, (previous, current) {
+      // * when we transition from a non-empty cart to an empty cart, we assume
+      // * it's because the payment has been completed and all the items have
+      // * been removed.
+      // * In this case, we transition to the orders page to show the completed
+      // * order.
+      // * This logic could be made more robust by checking if
+      // * 'stripe_customers/$uid/payments/$paymentId' has status = "succeeded",
+      // * but that requires some additional work
+      final previousCart = previous?.value;
+      final currentCart = current.value;
+      if (previousCart != null &&
+          previousCart.items.isNotEmpty &&
+          currentCart != null &&
+          currentCart.items.isEmpty) {
+        context.goNamed(AppRoute.orders.name);
+      }
     });
     final cartValue = ref.watch(cartProvider);
     return AsyncValueWidget<Cart>(

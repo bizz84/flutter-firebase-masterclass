@@ -34,7 +34,11 @@ class FakeCheckoutService implements CheckoutService {
   /// - process the payment and fullfill the order
   /// The server-side logic will be covered in course #2
   @override
-  Future<void> placeOrder() async {
+  Future<void> pay({
+    required bool isWeb,
+    String? windowUrl,
+    void Function(String)? webUrlCallback,
+  }) async {
     // * Assertion operator is ok here since this method is only called from
     // * a place where the user is signed in
     final uid = authRepository.currentUser!.uid;
@@ -77,5 +81,10 @@ class FakeCheckoutService implements CheckoutService {
             fakeProducsRepository.getProduct(entry.key)!.price) // price
         // then add them up
         .reduce((value, element) => value + element);
+  }
+
+  @override
+  void dispose() {
+    // no-op
   }
 }

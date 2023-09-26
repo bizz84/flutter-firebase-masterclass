@@ -71,6 +71,25 @@ final cartTotalProvider = AutoDisposeFutureProvider<double>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CartTotalRef = AutoDisposeFutureProviderRef<double>;
+String _$productsInCartHash() => r'0cb8d08ed97bbd829fb118bb7ac95f0fdf93ab4a';
+
+/// See also [productsInCart].
+@ProviderFor(productsInCart)
+final productsInCartProvider =
+    AutoDisposeFutureProvider<List<({Product product, int quantity})>>.internal(
+  productsInCart,
+  name: r'productsInCartProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$productsInCartHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ProductsInCartRef
+    = AutoDisposeFutureProviderRef<List<({Product product, int quantity})>>;
 String _$itemAvailableQuantityHash() =>
     r'7862f2c468049a37946711a9e97e8c66b35fe020';
 

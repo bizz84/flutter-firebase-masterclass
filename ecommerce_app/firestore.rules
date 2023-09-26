@@ -13,5 +13,15 @@ service cloud.firestore {
     match /cart/{uid} {
       allow read, write: if request.auth.uid == uid;
     }
+    
+    // allow client app to write checkout session data so the Stripe extension can process it
+    match /stripe_customers/{uid} {
+      match /checkout_sessions/{id} {
+        allow read, write: if request.auth.uid == uid;
+      }
+      match /payments/{id} {
+        allow read: if request.auth.uid == uid;
+      }
+    }
   }
 }

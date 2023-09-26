@@ -22,10 +22,11 @@ void main() {
   });
 
   group('pay', () {
+    const isWeb = false;
     test('success', () async {
       // setup
       final checkoutService = MockCheckoutService();
-      when(checkoutService.placeOrder).thenAnswer(
+      when(() => checkoutService.pay(isWeb: isWeb)).thenAnswer(
         (_) => Future.value(null),
       );
       final container = makeProviderContainer(checkoutService);
@@ -40,20 +41,20 @@ void main() {
       const data = AsyncData<void>(null);
       verify(() => listener(null, data));
       // run
-      await controller.pay();
+      await controller.pay(isWeb: isWeb);
       // verify
       verifyInOrder([
         () => listener(data, any(that: isA<AsyncLoading>())),
         () => listener(any(that: isA<AsyncLoading>()), data),
       ]);
       verifyNoMoreInteractions(listener);
-      verify(checkoutService.placeOrder).called(1);
+      verify(() => checkoutService.pay(isWeb: isWeb)).called(1);
     });
 
     test('failure', () async {
       // setup
       final checkoutService = MockCheckoutService();
-      when(checkoutService.placeOrder).thenThrow(
+      when(() => checkoutService.pay(isWeb: isWeb)).thenThrow(
         Exception('Card declined'),
       );
       final container = makeProviderContainer(checkoutService);
@@ -68,7 +69,7 @@ void main() {
       const data = AsyncData<void>(null);
       verify(() => listener(null, data));
       // run
-      await controller.pay();
+      await controller.pay(isWeb: isWeb);
       // verify
       verifyInOrder([
         () => listener(data, any(that: isA<AsyncLoading>())),
@@ -76,7 +77,7 @@ void main() {
             any(that: isA<AsyncLoading>()), any(that: isA<AsyncError>())),
       ]);
       verifyNoMoreInteractions(listener);
-      verify(checkoutService.placeOrder).called(1);
+      verify(() => checkoutService.pay(isWeb: isWeb)).called(1);
     });
   });
 }

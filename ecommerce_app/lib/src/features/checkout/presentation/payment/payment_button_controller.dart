@@ -15,10 +15,18 @@ class PaymentButtonController extends _$PaymentButtonController
     // nothing to do
   }
 
-  Future<void> pay() async {
+  Future<void> pay({
+    required bool isWeb,
+    String? windowUrl,
+    void Function(String)? webUrlCallback,
+  }) async {
     final checkoutService = ref.read(checkoutServiceProvider);
     state = const AsyncLoading();
-    final newState = await AsyncValue.guard(checkoutService.placeOrder);
+    final newState = await AsyncValue.guard(() => checkoutService.pay(
+          isWeb: isWeb,
+          windowUrl: windowUrl,
+          webUrlCallback: webUrlCallback,
+        ));
     // * Check if the controller is mounted before setting the state to prevent:
     // * Bad state: Tried to use PaymentButtonController after `dispose` was called.
     if (mounted) {

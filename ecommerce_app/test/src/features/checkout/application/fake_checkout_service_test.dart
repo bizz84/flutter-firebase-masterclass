@@ -47,13 +47,14 @@ void main() {
     );
   }
 
-  group('placeOrder', () {
+  group('pay', () {
     test('null user, throws', () async {
       // setup
       when(() => authRepository.currentUser).thenReturn(null);
       final checkoutService = makeCheckoutService();
       // run
-      expect(checkoutService.placeOrder, throwsA(isA<TypeError>()));
+      expect(
+          () => checkoutService.pay(isWeb: false), throwsA(isA<TypeError>()));
     });
 
     test('empty cart, throws', () async {
@@ -64,7 +65,7 @@ void main() {
       );
       final checkoutService = makeCheckoutService();
       // run
-      expect(checkoutService.placeOrder, throwsStateError);
+      expect(() => checkoutService.pay(isWeb: false), throwsStateError);
     });
 
     test('non-empty cart, creates order and purchase, empties cart', () async {
@@ -82,7 +83,7 @@ void main() {
       );
       final checkoutService = makeCheckoutService();
       // run
-      await checkoutService.placeOrder();
+      await checkoutService.pay(isWeb: false);
       // verify
       verify(() => ordersRepository.addOrder(testUser.uid, any())).called(1);
       verify(() => remoteCartRepository.setCart(testUser.uid, const Cart()))
