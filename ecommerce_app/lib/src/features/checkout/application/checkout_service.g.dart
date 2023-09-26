@@ -6,11 +6,11 @@ part of 'checkout_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$checkoutServiceHash() => r'700adb2476906740982e17cd0fbef5ed74470284';
+String _$checkoutServiceHash() => r'ced91b916ea902c8c15c4c8a5ecee396a855f7ab';
 
 /// See also [checkoutService].
 @ProviderFor(checkoutService)
-final checkoutServiceProvider = AutoDisposeProvider<CheckoutService>.internal(
+final checkoutServiceProvider = Provider<CheckoutService>.internal(
   checkoutService,
   name: r'checkoutServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -20,6 +20,6 @@ final checkoutServiceProvider = AutoDisposeProvider<CheckoutService>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef CheckoutServiceRef = AutoDisposeProviderRef<CheckoutService>;
+typedef CheckoutServiceRef = ProviderRef<CheckoutService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

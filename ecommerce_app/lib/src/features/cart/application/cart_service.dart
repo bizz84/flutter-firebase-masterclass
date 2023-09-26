@@ -108,6 +108,25 @@ Future<double> cartTotal(CartTotalRef ref) async {
   }
 }
 
+// * Returns a list of records representing all the products in the cart
+// * along with their quantity
+@riverpod
+Future<List<({Product product, int quantity})>> productsInCart(
+    ProductsInCartRef ref) async {
+  final cart = await ref.watch(cartProvider.future);
+  if (cart.items.isNotEmpty) {
+    List<({Product product, int quantity})> products = [];
+    for (final item in cart.items.entries) {
+      final product = await ref.watch(productStreamProvider(item.key).future);
+      if (product != null) {
+        products.add((product: product, quantity: item.value));
+      }
+    }
+    return products;
+  }
+  return [];
+}
+
 @riverpod
 int itemAvailableQuantity(ItemAvailableQuantityRef ref, Product product) {
   final cart = ref.watch(cartProvider).value;

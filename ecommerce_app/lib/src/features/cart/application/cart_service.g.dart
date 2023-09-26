@@ -63,6 +63,23 @@ final cartTotalProvider = AutoDisposeFutureProvider<double>.internal(
 );
 
 typedef CartTotalRef = AutoDisposeFutureProviderRef<double>;
+String _$productsInCartHash() => r'0cb8d08ed97bbd829fb118bb7ac95f0fdf93ab4a';
+
+/// See also [productsInCart].
+@ProviderFor(productsInCart)
+final productsInCartProvider =
+    AutoDisposeFutureProvider<List<({Product product, int quantity})>>.internal(
+  productsInCart,
+  name: r'productsInCartProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$productsInCartHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ProductsInCartRef
+    = AutoDisposeFutureProviderRef<List<({Product product, int quantity})>>;
 String _$itemAvailableQuantityHash() =>
     r'bf8ea212feaa0322b97753a9a241cbd1da278c2f';
 
