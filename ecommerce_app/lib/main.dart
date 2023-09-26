@@ -19,7 +19,7 @@ void main() async {
   // create an app bootstrap instance
   final appBootstrap = AppBootstrap();
   // * uncomment this to connect to the Firebase emulators
-  await appBootstrap.setupEmulators();
+  // await appBootstrap.setupEmulators();
   // create a container configured with all the Firebase repositories
   final container = await appBootstrap.createFirebaseProviderContainer();
   // use the container above to create the root widget
