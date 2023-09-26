@@ -9,6 +9,7 @@ import { makeAdminIfWhitelisted } from "./admin"
 
 exports.onUserCreated = functionsV1.auth.user().onCreate((user, _) => makeAdminIfWhitelisted(user))
 
+import { stripeSecretKey } from "./stripe_secret"
 // Stripe triggers
 import {
   onStripeProductWritten,
@@ -36,6 +37,9 @@ exports.onStripeCustomerCreated = functionsV2.firestore.onDocumentCreated(
 )
 
 exports.onStripePaymentWritten = functionsV2.firestore.onDocumentWritten(
-  "/stripe_customers/{stripeId}/payments/{paymentId}",
+  {
+    document: "/stripe_customers/{stripeId}/payments/{paymentId}",
+    secrets: [stripeSecretKey],
+  },
   onStripePaymentWritten,
 )

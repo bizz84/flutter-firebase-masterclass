@@ -1,6 +1,7 @@
 import {firestore, https, Change, ParamsOf} from "firebase-functions/v2"
 import * as admin from "firebase-admin"
 import * as logger from "firebase-functions/logger"
+import {getStripe} from "./stripe_secret"
 import {updateImage, deleteImageFromStorage} from "./stripe_images"
 
 const productPath = (id: string) => `products/${id}`
@@ -189,7 +190,38 @@ export async function fulfillOrder(
       throw error;
     }
   })
-  // TODO: Update available quantities
+  await updateStripeAvailableQuantities(firestore, cartItems, uid, paymentId)
+}
+
+/// Update available quantities in the Stripe products metadata
+async function updateStripeAvailableQuantities(
+  firestore: FirebaseFirestore.Firestore,
+  cartItems: Record<string, number>,
+  uid: string,
+  paymentId: string,
+) {
+  try {
+    const stripe = getStripe()
+    const entries = Object.entries<number>(cartItems)
+    for (const entry of entries) {
+      const [productId, quantity] = entry
+      // find a matching product
+      const productRef = firestore.doc(productPath(productId))
+      const product = await productRef.get()
+      const productData = product.data()
+      if (productData !== undefined) {
+        const { availableQuantity } = productData
+        // https://stripe.com/docs/api/products/update
+        await stripe.products.update(
+          product.id,
+          {metadata: {availableQuantity: availableQuantity - quantity}}
+        );
+      }
+    }
+  } catch (error) {
+    logger.error(`Could not update the available quantities on Stripe for uid: ${uid}, paymentId: ${paymentId}`, error);
+    throw error;
+  }
 }
 
 /// Helper function to calculate the cart total
