@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
 import 'package:ecommerce_app/src/features/orders/data/orders_repository.dart';
 import 'package:ecommerce_app/src/features/orders/domain/order.dart';
+import 'package:ecommerce_app/src/features/orders/domain/user_order.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
@@ -30,6 +31,21 @@ class FakeOrdersRepository implements OrdersRepository {
             .toList();
       } else {
         return ordersList;
+      }
+    });
+  }
+
+  @override
+  Stream<UserOrderID> watchLatestUserOrderId(UserID uid) {
+    return _orders.stream.map((ordersData) {
+      final ordersList = ordersData[uid] ?? [];
+      if (ordersList.isNotEmpty) {
+        ordersList.sort(
+          (lhs, rhs) => rhs.orderDate.compareTo(lhs.orderDate),
+        );
+        return (uid: uid, orderId: ordersList[0].id);
+      } else {
+        return (uid: uid, orderId: null);
       }
     });
   }
