@@ -18,7 +18,7 @@ class Product extends Equatable {
 
   /// Unique product id
   final ProductID id;
-  final String imageUrl;
+  final String? imageUrl;
   final String title;
   final String description;
   final double price;
@@ -29,7 +29,7 @@ class Product extends Equatable {
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       id: map['id'] as String,
-      imageUrl: map['imageUrl'] as String,
+      imageUrl: map['imageUrl'] as String?,
       title: map['title'] ?? '',
       description: map['description'] ?? '',
       price: map['price']?.toDouble() ?? 0.0,

@@ -8,24 +8,29 @@ import 'package:flutter/material.dart';
 /// [CachedNetworkImage] depending on the image url.
 class CustomImage extends StatelessWidget {
   const CustomImage({super.key, required this.imageUrl});
-  final String imageUrl;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
+    // needed to make null-checks easier
+    final imageUrl = this.imageUrl;
     // * For this widget to work correctly on web, we need to handle CORS:
     // * https://flutter.dev/docs/development/platform-integration/web-images
     return AspectRatio(
       aspectRatio: 1,
-      child: imageUrl.startsWith('http')
-          ? CachedNetworkImage(imageUrl: localhostFriendlyImageUrl)
-          : Image.asset(imageUrl),
+      child: imageUrl == null
+          ? const Placeholder()
+          : imageUrl.startsWith('http')
+              ? CachedNetworkImage(
+                  imageUrl: localhostFriendlyImageUrl(imageUrl))
+              : Image.asset(imageUrl),
     );
   }
 
   /// Unless the correct IP is used, the Android Emulator will fail to load
   /// localhost images that were saved with the Firebase Local Emulator
   /// This code ensures the correct IP is used on localhost
-  String get localhostFriendlyImageUrl {
+  String localhostFriendlyImageUrl(String imageUrl) {
     const localhostDefault1 = 'http://127.0.0.1';
     const localhostDefault2 = 'http://localhost';
     const localhostAndroid = 'http://10.0.2.2';

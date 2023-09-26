@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/src/exceptions/app_exception.dart';
 import 'package:ecommerce_app/src/features/products/data/products_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/features/products_admin/data/image_upload_repository.dart';
@@ -11,10 +12,14 @@ class ImageUploadService {
   final Ref ref;
 
   Future<void> uploadProduct(Product product) async {
+    final imageUrl = product.imageUrl;
+    if (imageUrl == null) {
+      throw NullProductImageUrlException();
+    }
     // upload to storage and return download URL
     final downloadUrl = await ref
         .read(imageUploadRepositoryProvider)
-        .uploadProductImageFromAsset(product.imageUrl, product.id);
+        .uploadProductImageFromAsset(imageUrl, product.id);
 
     // write to Cloud Firestore
     await ref
@@ -23,10 +28,13 @@ class ImageUploadService {
   }
 
   Future<void> deleteProduct(Product product) async {
-    // delete image from storage
-    await ref
-        .read(imageUploadRepositoryProvider)
-        .deleteProductImage(product.imageUrl);
+    final imageUrl = product.imageUrl;
+    if (imageUrl != null) {
+      // delete image from storage
+      await ref
+          .read(imageUploadRepositoryProvider)
+          .deleteProductImage(imageUrl);
+    }
 
     // delete product from Firestore
     await ref.read(productsRepositoryProvider).deleteProduct(product.id);

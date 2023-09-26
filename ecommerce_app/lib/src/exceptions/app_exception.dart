@@ -30,6 +30,12 @@ class UserNotFoundException extends AppException {
   UserNotFoundException() : super('user-not-found', 'User not found'.hardcoded);
 }
 
+class UserNotSignedInException extends AppException {
+  UserNotSignedInException()
+      : super('user-not-signed-in',
+            'The operation can\'t be completed (not signed in)'.hardcoded);
+}
+
 /// Cart
 class CartSyncFailedException extends AppException {
   CartSyncFailedException()
@@ -42,6 +48,13 @@ class PaymentFailureEmptyCartException extends AppException {
   PaymentFailureEmptyCartException()
       : super('payment-failure-empty-cart',
             'Can\'t place an order if the cart is empty'.hardcoded);
+}
+
+// Products
+class NullProductImageUrlException extends AppException {
+  NullProductImageUrlException()
+      : super('user-not-signed-in',
+            'Can\'t upload a product with a null image'.hardcoded);
 }
 
 /// Orders
