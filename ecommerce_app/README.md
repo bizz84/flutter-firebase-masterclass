@@ -51,6 +51,8 @@ flutterfire configure
 
 ### Stripe Setup
 
+In module 8 of the course, we add Stripe to the eCommerce app.
+
 For the Stripe code to work, a `STRIPE_PUBLISHABLE_KEY` needs to be set on the client.
 
 To set it, create an `.env` file inside the `ecommerce_app` folder and add your [Stripe publishable key](https://dashboard.stripe.com/test/apikeys):
