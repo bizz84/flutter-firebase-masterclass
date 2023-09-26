@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
 import 'package:ecommerce_app/src/features/orders/data/orders_repository.dart';
 import 'package:ecommerce_app/src/features/orders/domain/order.dart';
+import 'package:ecommerce_app/src/features/orders/domain/user_order.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -32,5 +33,16 @@ Stream<List<Order>> matchingUserOrders(
   } else {
     // If the user is null, return an empty list (no orders)
     return Stream.value([]);
+  }
+}
+
+@riverpod
+Stream<UserOrderID> latestUserOrderId(Ref ref) {
+  final user = ref.watch(authStateChangesProvider).value;
+  if (user != null) {
+    return ref.watch(ordersRepositoryProvider).watchLatestUserOrderId(user.uid);
+  } else {
+    // If the user is null, return an empty list (no orders)
+    return const Stream.empty();
   }
 }

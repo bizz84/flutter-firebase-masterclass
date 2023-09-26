@@ -14,6 +14,7 @@ import {
   onStripeProductWritten,
   onStripePriceWritten,
   onStripeCustomerCreated,
+  onStripePaymentWritten,
 } from "./stripe"
 
 // Triggered when a Stripe product is written to Firestore
@@ -32,4 +33,9 @@ exports.onStripePriceWritten = functionsV2.firestore.onDocumentWritten(
 exports.onStripeCustomerCreated = functionsV2.firestore.onDocumentCreated(
   "/stripe_customers/{id}",
   onStripeCustomerCreated,
+)
+
+exports.onStripePaymentWritten = functionsV2.firestore.onDocumentWritten(
+  "/stripe_customers/{stripeId}/payments/{paymentId}",
+  onStripePaymentWritten,
 )

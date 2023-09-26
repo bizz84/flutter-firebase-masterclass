@@ -112,7 +112,7 @@ Future<double> cartTotal(Ref ref) async {
 // * along with their quantity
 @riverpod
 Future<List<({Product product, int quantity})>> productsInCart(
-    ProductsInCartRef ref) async {
+    Ref ref) async {
   final cart = await ref.watch(cartProvider.future);
   if (cart.items.isNotEmpty) {
     List<({Product product, int quantity})> products = [];

@@ -190,5 +190,24 @@ class _MatchingUserOrdersProviderElement
   @override
   String get productId => (origin as MatchingUserOrdersProvider).productId;
 }
+
+String _$latestUserOrderIdHash() => r'82bed71230a32eda0b8d548db229db6a2afd60d7';
+
+/// See also [latestUserOrderId].
+@ProviderFor(latestUserOrderId)
+final latestUserOrderIdProvider =
+    AutoDisposeStreamProvider<UserOrderID>.internal(
+  latestUserOrderId,
+  name: r'latestUserOrderIdProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$latestUserOrderIdHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef LatestUserOrderIdRef = AutoDisposeStreamProviderRef<UserOrderID>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

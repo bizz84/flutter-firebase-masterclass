@@ -23,5 +23,17 @@ service cloud.firestore {
         allow read: if request.auth.uid == uid;
       }
     }
+
+    // using wildcard since orders is a collection group. More details here:
+    // https://firebase.blog/posts/2019/06/understanding-collection-group-queries
+    match /{somePath=**}/orders/{id} {
+      allow read: if resource.data.userId == request.auth.uid || request.auth.token.admin == true;
+      allow write: if request.auth.token.admin == true;
+    }
+
+    // latest order for a user
+    match /latest_orders/{uid} {
+      allow read: if request.auth.uid == uid;
+    }
   }
 }
