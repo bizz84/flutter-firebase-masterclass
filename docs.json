@@ -51,6 +51,10 @@
                 [
                     "DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS",
                     "/faq/xcode-dt-toolchain-dir"
+                ],
+                [
+                    "Xcode 15 build warnings on macOS (DVTAssertions)",
+                    "/faq/xcode-dvt-assertions-macos"
                 ]
             ]
         ],
