@@ -37,10 +37,6 @@
                     "/faq/macos-deployment-target-issue"
                 ],
                 [
-                    "Flutter & Firebase Auth on macOS: Resolving Common Issues",
-                    "/faq/flutter-firebase-macos-errors"
-                ],
-                [
                     "Missing file libarclite_iphoneos.a (Xcode 14.3)",
                     "/faq/missing-file-xcode-14.3"
                 ],
@@ -51,7 +47,11 @@
                 [
                     "Can't run build_runner because `BuildForInputLogger`",
                     "/faq/cant-run-build-runner-build-runner-logger"
-                ]                
+                ],
+                [
+                    "DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS",
+                    "/faq/xcode-dt-toolchain-dir"
+                ]
             ]
         ],
         [
@@ -68,6 +68,19 @@
                 [
                     "Cleartext HTTP traffic not permitted (Firebase Local Emulator + Android Emulator)",
                     "/faq/cleartext-http-traffic-not-permitted"
+                ]
+            ]
+        ],
+        [
+            "FAQ (Firebase)",
+            [
+                [
+                    "Flutter & Firebase Auth on macOS: Resolving Common Issues",
+                    "/faq/flutter-firebase-macos-errors"
+                ],
+                [
+                    "firebase-tools no longer supports Java version before 11.",
+                    "/faq/firebase-tools-java-11"
                 ]
             ]
         ],
