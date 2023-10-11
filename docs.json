@@ -85,6 +85,10 @@
                 [
                     "firebase-tools no longer supports Java version before 11.",
                     "/faq/firebase-tools-java-11"
+                ],
+                [
+                    "Failed to update function after updating a Firebase secret",
+                    "/faq/failed-update-cloud-function-secret"
                 ]
             ]
         ],
