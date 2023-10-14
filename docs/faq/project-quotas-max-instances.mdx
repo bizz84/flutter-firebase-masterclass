@@ -1,0 +1,27 @@
+# Your current project quotas don’t allow for the current max instances setting of 100
+
+When deploying some of the 2nd-gen Cloud Functions, you may come across the error below. 👇
+
+---
+
+Your current project quotas don’t allow for the current max instances setting of 100.
+Either reduce this function’s maximum instances, or request a quota increase on the underlying Cloud Run service at https://cloud.google.com/run/quotas.
+You can adjust the max instances value in your function’s runtime options:
+
+```ts
+setGlobalOptions({maxInstances: 10})
+```
+
+Failed to create function projects/flutter-firebase-masterc-514db/locations/us-central1/functions/onStripeProductWritten
+
+---
+
+[This answer](https://stackoverflow.com/a/76439381/436422) on StackOverflow explains how to solve the problem:
+
+```ts
+// index.ts
+import { setGlobalOptions } from "firebase-functions/v2";
+
+// Set the maximum instances to 10 for all functions
+setGlobalOptions({ maxInstances: 10 });
+```

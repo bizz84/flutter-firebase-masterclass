@@ -89,6 +89,10 @@
                 [
                     "Failed to update function after updating a Firebase secret",
                     "/faq/failed-update-cloud-function-secret"
+                ],
+                [
+                    "Your current project quotas don’t allow for the current max instances setting of 100",
+                    "/faq/project-quotas-max-instances"
                 ]
             ]
         ],
