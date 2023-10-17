@@ -33,8 +33,7 @@ class _ProductsSearchTextFieldState
       builder: (context, value, _) {
         return TextField(
           controller: _controller,
-          // TODO: Re-enable once we implement search again
-          enabled: false,
+          enabled: true, // * enable search
           autofocus: false,
           style: Theme.of(context).textTheme.titleLarge,
           decoration: InputDecoration(
