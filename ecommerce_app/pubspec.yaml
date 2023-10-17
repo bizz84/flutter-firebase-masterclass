@@ -32,7 +32,8 @@ dependencies:
   flutter_stripe_web: 4.5.0
   pay: 1.1.2
   envied: 0.5.1
-
+  algolia: 1.1.2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

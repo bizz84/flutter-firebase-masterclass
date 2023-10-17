@@ -73,8 +73,8 @@ class ProductsRepository {
   // * Temporary search implementation.
   // * Note: this is quite inefficient as it pulls the entire product list
   // * and then filters the data on the client
-  // TODO: Update
-  Future<List<Product>> searchProducts(String query) async {
+  // TODO: Replace this with server-side search
+  Future<List<Product>> search(String query) async {
     // 1. Get all products from Firestore
     final productsList = await fetchProductsList();
     // 2. Perform client-side filtering
@@ -112,30 +112,4 @@ Stream<Product?> productStream(ProductStreamRef ref, ProductID id) {
 Future<Product?> productFuture(ProductFutureRef ref, ProductID id) {
   final productsRepository = ref.watch(productsRepositoryProvider);
   return productsRepository.fetchProduct(id);
-}
-
-@riverpod
-Future<List<Product>> productsListSearch(
-    ProductsListSearchRef ref, String query) async {
-  final link = ref.keepAlive();
-  // a timer to be used by the callbacks below
-  Timer? timer;
-  // When the provider is destroyed, cancel the http request and the timer
-  ref.onDispose(() {
-    timer?.cancel();
-  });
-  // When the last listener is removed, start a timer to dispose the cached data
-  ref.onCancel(() {
-    // start a 30 second timer
-    timer = Timer(const Duration(seconds: 30), () {
-      // dispose on timeout
-      link.close();
-    });
-  });
-  // If the provider is listened again after it was paused, cancel the timer
-  ref.onResume(() {
-    timer?.cancel();
-  });
-  final productsRepository = ref.watch(productsRepositoryProvider);
-  return productsRepository.searchProducts(query);
 }

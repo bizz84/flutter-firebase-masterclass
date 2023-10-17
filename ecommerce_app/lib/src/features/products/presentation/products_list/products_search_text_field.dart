@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/src/features/products/presentation/products_list/products_search_state_provider.dart';
+import 'package:ecommerce_app/src/features/products/presentation/products_list/products_search_query_notifier.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,8 +33,7 @@ class _ProductsSearchTextFieldState
       builder: (context, value, _) {
         return TextField(
           controller: _controller,
-          // TODO: Re-enable once we implement search again
-          enabled: false,
+          enabled: true, // * enable search
           autofocus: false,
           style: Theme.of(context).textTheme.titleLarge,
           decoration: InputDecoration(
@@ -45,15 +44,16 @@ class _ProductsSearchTextFieldState
                     onPressed: () {
                       _controller.clear();
                       ref
-                          .read(productsSearchQueryStateProvider.notifier)
-                          .state = '';
+                          .read(productsSearchQueryNotifierProvider.notifier)
+                          .setQuery('');
                     },
                     icon: const Icon(Icons.clear),
                   )
                 : null,
           ),
-          onChanged: (text) =>
-              ref.read(productsSearchQueryStateProvider.notifier).state = text,
+          onChanged: (text) => ref
+              .read(productsSearchQueryNotifierProvider.notifier)
+              .setQuery(text),
         );
       },
     );

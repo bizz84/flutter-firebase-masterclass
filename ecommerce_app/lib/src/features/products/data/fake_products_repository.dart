@@ -1,12 +1,14 @@
 import 'dart:async';
 
+import 'package:ecommerce_app/src/features/products/data/products_search_repository.dart';
 import 'package:ecommerce_app/src/features/products/data/test_products.dart';
 import 'package:ecommerce_app/src/features/products/data/products_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
 
-class FakeProductsRepository implements ProductsRepository {
+class FakeProductsRepository
+    implements ProductsRepository, ProductsSearchRepository {
   FakeProductsRepository({this.addDelay = true});
   final bool addDelay;
 
@@ -61,7 +63,7 @@ class FakeProductsRepository implements ProductsRepository {
 
   /// Search for products where the title contains the search query
   @override
-  Future<List<Product>> searchProducts(String query) async {
+  Future<List<Product>> search(String query) async {
     assert(
       _products.value.length <= 100,
       'Client-side search should only be performed if the number of products is small. '
