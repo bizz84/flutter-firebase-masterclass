@@ -26,7 +26,7 @@ final productsSearchResultsProvider =
 
 typedef ProductsSearchResultsRef = AutoDisposeFutureProviderRef<List<Product>>;
 String _$productsSearchQueryNotifierHash() =>
-    r'203015647bc5b05b23786948cfce130b1656dae9';
+    r'94ae4fe2c9d0cfd527dffee765fb51e4069892bc';
 
 /// A simple notifier class to keep track of the search query
 ///
