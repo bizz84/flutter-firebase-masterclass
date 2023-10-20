@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/src/app_bootstrap.dart';
+import 'package:ecommerce_app/src/features/products/data/products_search_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ecommerce_app/src/exceptions/async_error_logger.dart';
 import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
@@ -67,6 +68,7 @@ extension AppBootstrapFakes on AppBootstrap {
         // repositories
         authRepositoryProvider.overrideWithValue(authRepository),
         productsRepositoryProvider.overrideWithValue(productsRepository),
+        productsSearchRepositoryProvider.overrideWithValue(productsRepository),
         reviewsRepositoryProvider.overrideWithValue(reviewsRepository),
         ordersRepositoryProvider.overrideWithValue(ordersRepository),
         localCartRepositoryProvider.overrideWithValue(localCartRepository),
