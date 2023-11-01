@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:ecommerce_app/src/common_widgets/async_value_widget.dart';
+import 'package:ecommerce_app/src/common_widgets/error_message_widget.dart';
 import 'package:ecommerce_app/src/constants/breakpoints.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/features/products/presentation/products_list/product_card.dart';
@@ -20,18 +20,30 @@ class SliverProductsGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // * Use the new search results provider
     final productsListValue = ref.watch(productsSearchResultsProvider);
-    return AsyncValueSliverWidget<List<Product>>(
-      value: productsListValue,
-      data: (products) => SliverProductsAlignedGrid(
-        itemCount: products.length,
-        itemBuilder: (_, index) {
-          final product = products[index];
-          return ProductCard(
-            product: product,
-            onPressed: () => onPressed?.call(context, product.id),
-          );
-        },
-      ),
+    final error = productsListValue.error;
+    if (error != null) {
+      return SliverToBoxAdapter(
+        child: Center(child: ErrorMessageWidget(error.toString())),
+      );
+    }
+    // * The previous value will be returned while loading
+    final products = productsListValue.value;
+    // * As a result, we only show the loading indicator if the value is null
+    if (products == null) {
+      return const SliverToBoxAdapter(
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+    // * Otherwise, we use the current or previous value to show the products
+    return SliverProductsAlignedGrid(
+      itemCount: products.length,
+      itemBuilder: (_, index) {
+        final product = products[index];
+        return ProductCard(
+          product: product,
+          onPressed: () => onPressed?.call(context, product.id),
+        );
+      },
     );
   }
 }
