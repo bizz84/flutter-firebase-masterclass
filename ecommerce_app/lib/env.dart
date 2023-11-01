@@ -18,10 +18,9 @@ final class Env {
   @EnviedField(varName: 'STRIPE_PUBLISHABLE_KEY', obfuscate: true)
   static final String stripePublishableKey = _Env.stripePublishableKey;
 
-  // TODO: Uncomment
-  // @EnviedField(varName: 'ALGOLIA_APP_ID', obfuscate: true)
-  // static final String algoliaAppId = _Env.algoliaAppId;
+  @EnviedField(varName: 'ALGOLIA_APP_ID', obfuscate: true)
+  static final String algoliaAppId = _Env.algoliaAppId;
 
-  // @EnviedField(varName: 'ALGOLIA_SEARCH_KEY', obfuscate: true)
-  // static final String algoliaSearchKey = _Env.algoliaSearchKey;
+  @EnviedField(varName: 'ALGOLIA_SEARCH_KEY', obfuscate: true)
+  static final String algoliaSearchKey = _Env.algoliaSearchKey;
 }
