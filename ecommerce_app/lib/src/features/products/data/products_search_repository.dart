@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:ecommerce_app/src/features/products/data/products_repository.dart';
+import 'package:algolia/algolia.dart';
+import 'package:ecommerce_app/env.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -8,21 +9,28 @@ part 'products_search_repository.g.dart';
 
 /// Class used to search products using the Algolia Dart Client
 class ProductsSearchRepository {
-  // TODO: Add Algolia as a dependency
-  const ProductsSearchRepository();
+  const ProductsSearchRepository(this._algolia);
+  final Algolia _algolia;
 
   /// Search for the given text an return a list of products
   Future<List<Product>> search(String text) async {
-    // TODO: Implement
-    throw UnimplementedError();
+    // * Use the index name that is configured in the Algolia dashboard
+    // * https://dashboard.algolia.com/apps/APP_ID/explorer/browse
+    final index = _algolia.index('products_index');
+    final query = index.query(text);
+    final objects = await query.getObjects();
+    return objects.hits.map((hit) => Product.fromMap(hit.data)).toList();
   }
 }
 
 @Riverpod(keepAlive: true)
 ProductsSearchRepository productsSearchRepository(
     ProductsSearchRepositoryRef ref) {
-  // TODO: Initialize the Algolia client with the API keys
-  return const ProductsSearchRepository();
+  final algolia = Algolia.init(
+    applicationId: Env.algoliaAppId,
+    apiKey: Env.algoliaSearchKey,
+  );
+  return ProductsSearchRepository(algolia);
 }
 
 @riverpod
@@ -47,7 +55,6 @@ Future<List<Product>> productsListSearch(
   ref.onResume(() {
     timer?.cancel();
   });
-  // TODO: use ProductsSearchRepository instead
-  final productsRepository = ref.watch(productsRepositoryProvider);
-  return productsRepository.search(query);
+  final searchRepository = ref.watch(productsSearchRepositoryProvider);
+  return searchRepository.search(query);
 }
