@@ -1,33 +1,44 @@
 import 'dart:async';
 
-import 'package:ecommerce_app/src/features/products/data/products_repository.dart';
+import 'package:algolia_helper_flutter/algolia_helper_flutter.dart';
+import 'package:ecommerce_app/env.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'products_search_repository.g.dart';
 
 /// Class used to search products using the Algolia Dart Client
 class ProductsSearchRepository {
-  // TODO: Add Algolia as a dependency
-  const ProductsSearchRepository();
+  const ProductsSearchRepository(this._searcher);
+  final HitsSearcher _searcher;
 
   /// Search for the given text an return a list of products
   Future<List<Product>> search(String text) async {
-    // TODO: Implement
-    throw UnimplementedError();
+    // * Set the search query
+    _searcher.query(text);
+    // * The first event that is emitted by the stream will contain the results
+    final response = await _searcher.responses.first;
+    return response.hits
+        .map((hit) => Product.fromMap(Map.fromEntries(hit.entries)))
+        .toList();
   }
 }
 
 @Riverpod(keepAlive: true)
-ProductsSearchRepository productsSearchRepository(
-    ProductsSearchRepositoryRef ref) {
-  // TODO: Initialize the Algolia client with the API keys
-  return const ProductsSearchRepository();
+ProductsSearchRepository productsSearchRepository(Ref ref) {
+  final algolia = HitsSearcher(
+    applicationID: Env.algoliaAppId,
+    apiKey: Env.algoliaSearchKey,
+    // * Use the index name that is configured in the Algolia dashboard
+    // * https://dashboard.algolia.com/apps/APP_ID/explorer/browse
+    indexName: 'products_index',
+  );
+  return ProductsSearchRepository(algolia);
 }
 
 @riverpod
-Future<List<Product>> productsListSearch(
-    ProductsListSearchRef ref, String query) async {
+Future<List<Product>> productsListSearch(Ref ref, String query) async {
   final link = ref.keepAlive();
   // a timer to be used by the callbacks below
   Timer? timer;
@@ -47,7 +58,6 @@ Future<List<Product>> productsListSearch(
   ref.onResume(() {
     timer?.cancel();
   });
-  // TODO: use ProductsSearchRepository instead
-  final productsRepository = ref.watch(productsRepositoryProvider);
-  return productsRepository.search(query);
+  final searchRepository = ref.watch(productsSearchRepositoryProvider);
+  return searchRepository.search(query);
 }
