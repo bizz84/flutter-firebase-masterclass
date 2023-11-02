@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:algolia/algolia.dart';
 import 'package:ecommerce_app/env.dart';
+import 'package:ecommerce_app/src/features/products/data/products_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -55,6 +56,12 @@ Future<List<Product>> productsListSearch(
   ref.onResume(() {
     timer?.cancel();
   });
-  final searchRepository = ref.watch(productsSearchRepositoryProvider);
-  return searchRepository.search(query);
+  if (query.isNotEmpty) {
+    // * if the query is not empty, use the search repository (one-time read)
+    final searchRepository = ref.watch(productsSearchRepositoryProvider);
+    return searchRepository.search(query);
+  } else {
+    // * otherwise, use the default stream provider (realtime data)
+    return ref.watch(productsListStreamProvider.future);
+  }
 }

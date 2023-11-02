@@ -24,7 +24,7 @@ final productsSearchRepositoryProvider =
 
 typedef ProductsSearchRepositoryRef = ProviderRef<ProductsSearchRepository>;
 String _$productsListSearchHash() =>
-    r'cd38c5b7fb08c3ea1cf806bd0cf3c5879211b351';
+    r'897fadbce044110b2ecc32335d5c9802ecd6f723';
 
 /// Copied from Dart SDK
 class _SystemHash {
