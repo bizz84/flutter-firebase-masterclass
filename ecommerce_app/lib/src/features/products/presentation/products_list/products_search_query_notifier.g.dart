@@ -28,7 +28,7 @@ final productsSearchResultsProvider =
 // ignore: unused_element
 typedef ProductsSearchResultsRef = AutoDisposeFutureProviderRef<List<Product>>;
 String _$productsSearchQueryNotifierHash() =>
-    r'94ae4fe2c9d0cfd527dffee765fb51e4069892bc';
+    r'308060397076bc2d8b5156a3c72d8ab86c8dad03';
 
 /// A simple notifier class to keep track of the search query
 ///

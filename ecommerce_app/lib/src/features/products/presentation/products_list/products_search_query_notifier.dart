@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:ecommerce_app/src/features/products/data/products_search_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
@@ -33,14 +32,14 @@ class ProductsSearchQueryNotifier extends _$ProductsSearchQueryNotifier {
 
   void _updateState(String query) {
     // only update the state once the query has been debounced
-    log('state = $query');
+    // log('state = $query');
     state = query;
   }
 
   void setQuery(String query) {
     // rather than setting the state directly, add the query to the sink so it
     // can be debounced
-    log('query = $query');
+    // log('query = $query');
     _searchQueryController.sink.add(query);
   }
 }
