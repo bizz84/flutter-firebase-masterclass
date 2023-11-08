@@ -61,7 +61,7 @@ Future<List<Product>> productsListSearch(Ref ref, String query) async {
   });
   if (query.isNotEmpty) {
     // * if the query is not empty, use the search repository (one-time read)
-    final searchRepository = ref.watch(productsSearchRepositoryProvider);
+    final searchRepository = ref.watch(productsRepositoryProvider);
     return searchRepository.search(query);
   } else {
     // * otherwise, use the default stream provider (realtime data)

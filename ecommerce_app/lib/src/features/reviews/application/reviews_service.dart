@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/src/exceptions/app_exception.dart';
 import 'package:ecommerce_app/src/features/authentication/data/auth_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/features/reviews/data/reviews_repository.dart';
@@ -14,9 +15,16 @@ class ReviewsService {
   Future<void> submitReview({
     required ProductID productId,
     required Review review,
-  }) {
-    // TODO: Implement with Firebase
-    throw UnimplementedError();
+  }) async {
+    final user = _ref.read(authRepositoryProvider).currentUser;
+    if (user == null) {
+      throw UserNotSignedInException();
+    }
+    await _ref.read(reviewsRepositoryProvider).setReview(
+          productId: productId,
+          uid: user.uid,
+          review: review,
+        );
   }
 }
 

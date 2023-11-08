@@ -5,8 +5,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ecommerce_app/src/exceptions/async_error_logger.dart';
 import 'package:ecommerce_app/src/features/cart/data/local/local_cart_repository.dart';
-import 'package:ecommerce_app/src/features/reviews/data/fake_reviews_repository.dart';
-import 'package:ecommerce_app/src/features/reviews/data/reviews_repository.dart';
 import 'features/cart/data/local/sembast_cart_repository.dart';
 
 /// Extension methods specific for the Firebase project configuration
@@ -32,13 +30,9 @@ extension AppBootstrapFirebase on AppBootstrap {
   Future<ProviderContainer> createFirebaseProviderContainer(
       {bool addDelay = true}) async {
     final localCartRepository = await SembastCartRepository.makeDefault();
-    // TODO: Replace with Firebase repositories
-    final reviewsRepository = FakeReviewsRepository(addDelay: addDelay);
-
     return ProviderContainer(
       overrides: [
         // repositories
-        reviewsRepositoryProvider.overrideWithValue(reviewsRepository),
         localCartRepositoryProvider.overrideWithValue(localCartRepository),
       ],
       observers: [AsyncErrorLogger()],
