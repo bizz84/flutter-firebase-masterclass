@@ -43,3 +43,11 @@ exports.onStripePaymentWritten = functionsV2.firestore.onDocumentWritten(
   },
   onStripePaymentWritten,
 )
+
+// Ratings
+import { updateRating } from "./ratings"
+
+exports.onProductReviewWritten = functionsV2.firestore.onDocumentWritten(
+  "products/{id}/reviews/{uid}",
+  updateRating,
+)
