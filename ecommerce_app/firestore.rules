@@ -35,5 +35,11 @@ service cloud.firestore {
     match /latest_orders/{uid} {
       allow read: if request.auth.uid == uid;
     }
+
+    // reviews
+    match /products/{id}/reviews/{uid} {
+      allow read: if true;
+      allow write: if request.auth.uid == uid;
+    }
   }
 }
