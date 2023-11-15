@@ -89,7 +89,6 @@ unlinked_spec.ds
 **/ios/Flutter/.last_build_id
 
 # Web related
-lib/generated_plugin_registrant.dart
 .firebase/hosting*
 
 # Exceptions to above rules.
