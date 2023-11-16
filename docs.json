@@ -55,6 +55,10 @@
                 [
                     "Xcode 15 build warnings on macOS (DVTAssertions)",
                     "/faq/xcode-dvt-assertions-macos"
+                ],
+                [
+                    "Xcode sandbox error when building for iOS",
+                    "/faq/xcode-ios-sandbox-error"
                 ]
             ]
         ],
