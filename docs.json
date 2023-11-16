@@ -59,6 +59,10 @@
                 [
                     "Xcode sandbox error when building for iOS",
                     "/faq/xcode-ios-sandbox-error"
+                ],
+                [
+                    "Extra page shown when swiping back in Safari on iOS",
+                    "/faq/extra-page-swiping-safari-ios"
                 ]
             ]
         ],
