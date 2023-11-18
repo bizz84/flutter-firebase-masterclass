@@ -32,9 +32,6 @@ class Robot {
   final GoldenRobot golden;
 
   Future<void> pumpMyAppWithFakes() async {
-    // ensure URL changes in the address bar when using push / pushNamed
-    // more info here: https://docs.google.com/document/d/1VCuB85D5kYxPR3qYOjVmw8boAGKb7k62heFyfFHTOvw/edit
-    GoRouter.optionURLReflectsImperativeAPIs = true;
     final container = await createFakesProviderContainer(addDelay: false);
     // * Initialize CartSyncService to start the listener
     container.read(cartSyncServiceProvider);
