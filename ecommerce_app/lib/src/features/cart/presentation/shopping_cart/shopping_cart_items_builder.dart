@@ -40,8 +40,8 @@ class ShoppingCartItemsBuilder extends StatelessWidget {
         child: Row(
           children: [
             Flexible(
-              // use 3 flex units for the list of items
-              flex: 3,
+              // use 30 flex units for the list of items
+              flex: 30,
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(vertical: Sizes.p16),
                 itemBuilder: (context, index) {
@@ -53,8 +53,8 @@ class ShoppingCartItemsBuilder extends StatelessWidget {
             ),
             gapW16,
             Flexible(
-              // use 1 flex unit for the checkout button
-              flex: 1,
+              // use 11 flex unit for the checkout button
+              flex: 11,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: Sizes.p16),
                 child: CartTotalWithCTA(ctaBuilder: ctaBuilder),
