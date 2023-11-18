@@ -4,7 +4,6 @@ import 'package:ecommerce_app/src/features/cart/application/cart_sync_service.da
 import 'package:ecommerce_app/src/features/products/presentation/home_app_bar/more_menu_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'features/authentication/auth_robot.dart';
 import 'features/cart/cart_robot.dart';
 import 'features/checkout/checkout_robot.dart';
