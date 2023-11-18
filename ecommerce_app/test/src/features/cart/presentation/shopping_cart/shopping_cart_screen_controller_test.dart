@@ -38,7 +38,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         shoppingCartScreenControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);
@@ -67,7 +67,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         shoppingCartScreenControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);
@@ -97,7 +97,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         shoppingCartScreenControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);
@@ -124,7 +124,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         shoppingCartScreenControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);

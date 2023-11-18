@@ -39,7 +39,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         emailPasswordSignInControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);
@@ -75,7 +75,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         emailPasswordSignInControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       // verify initial value from build method

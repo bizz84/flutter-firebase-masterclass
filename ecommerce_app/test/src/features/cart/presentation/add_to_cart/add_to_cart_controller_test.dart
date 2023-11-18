@@ -40,7 +40,7 @@ void main() {
       final addToCartListener = Listener<AsyncValue<void>>();
       container.listen(
         addToCartControllerProvider,
-        addToCartListener,
+        addToCartListener.call,
         fireImmediately: true,
       );
       // item quantity controller
@@ -49,7 +49,7 @@ void main() {
       final itemQuantityListener = Listener<int>();
       container.listen(
         itemQuantityControllerProvider,
-        itemQuantityListener,
+        itemQuantityListener.call,
         fireImmediately: true,
       );
       // run
@@ -98,7 +98,7 @@ void main() {
       final addToCartListener = Listener<AsyncValue<void>>();
       container.listen(
         addToCartControllerProvider,
-        addToCartListener,
+        addToCartListener.call,
         fireImmediately: true,
       );
       // item quantity controller
@@ -107,7 +107,7 @@ void main() {
       final itemQuantityListener = Listener<int>();
       container.listen(
         itemQuantityControllerProvider,
-        itemQuantityListener,
+        itemQuantityListener.call,
         fireImmediately: true,
       );
       // run

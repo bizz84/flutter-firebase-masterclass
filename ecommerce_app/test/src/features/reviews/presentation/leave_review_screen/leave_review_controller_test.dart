@@ -47,7 +47,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         leaveReviewControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);
@@ -86,7 +86,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         leaveReviewControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);
@@ -126,7 +126,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         leaveReviewControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);

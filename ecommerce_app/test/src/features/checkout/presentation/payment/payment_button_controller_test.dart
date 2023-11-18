@@ -34,7 +34,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         paymentButtonControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);
@@ -62,7 +62,7 @@ void main() {
       final listener = Listener<AsyncValue<void>>();
       container.listen(
         paymentButtonControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);

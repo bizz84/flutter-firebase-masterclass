@@ -32,7 +32,7 @@ void main() {
       // listen to the provider and call [listener] whenever its value changes
       container.listen(
         accountScreenControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       // verify
@@ -58,7 +58,7 @@ void main() {
       // listen to the provider and call [listener] whenever its value changes
       container.listen(
         accountScreenControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       // sto
@@ -94,7 +94,7 @@ void main() {
       // listen to the provider and call [listener] whenever its value changes
       container.listen(
         accountScreenControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
       const data = AsyncData<void>(null);
