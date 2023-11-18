@@ -1,0 +1,26 @@
+# Firebase Course - November 2023 Update
+
+Mainly **minor** changes:
+
+- Updated course to Flutter 3.16, Dart 3.2
+- Updated course to latest package versions
+- Enabled Material 3 in the main project (`useMaterial3: true`)
+
+To run the latest code, make sure you're running on Flutter 3.16 (run `flutter upgrade` if you're still on an older version).
+
+I also recommend to upgrade to **Xcode 15** and **Cocoapods 1.13.0** or above if you want to develop for iOS and macOS.
+
+Here are the most important details for each section / lesson. 👇
+
+### Section 1
+
+- Updated starter project to Flutter 3.16 and the latest packages
+- Set `useMaterial3: false` in the `ThemeData` (this applies to the [small demo app](https://github.com/bizz84/faker_app_flutter_firebase))
+
+### Section 2
+
+- Updated starter project to Flutter 3.16 and the latest packages
+- Set `useMaterial3: true` in the `ThemeData` (this applies to the [eCommerce app](https://github.com/bizz84/flutter-firebase-masterclass))
+- Updated course to GoRouter 12.1.1 and always use `goNamed` rather than `pushNamed` (since push APIs can cause problems with `redirect` and `refreshListenable`)
+- Added some notes about asynchronous dependency initialization (see [this tip](https://github.com/bizz84/flutter-tips-and-tricks/blob/main/tips/0131-future-provider-require-value/index.md) for more details)
+
