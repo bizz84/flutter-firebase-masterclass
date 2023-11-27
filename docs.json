@@ -101,6 +101,10 @@
                 [
                     "Your current project quotas don’t allow for the current max instances setting of 100",
                     "/faq/project-quotas-max-instances"
+                ],
+                [
+                    "This project is set up to use Cloud Firestore in Datastore mode",
+                    "/faq/cloud-firestore-setup-datastore-mode"
                 ]
             ]
         ],
