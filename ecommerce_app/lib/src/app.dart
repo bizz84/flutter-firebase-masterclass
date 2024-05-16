@@ -29,6 +29,10 @@ class MyApp extends ConsumerWidget {
             foregroundColor: Colors.white, // foreground (text) color
           ),
         ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.black, // background (button) color
+          foregroundColor: Colors.white, // foreground (text) color
+        ),
       ),
     );
   }
