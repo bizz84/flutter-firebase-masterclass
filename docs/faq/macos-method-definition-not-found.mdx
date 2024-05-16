@@ -1,0 +1,15 @@
+# macOS warning: method definition not found
+
+While running the project on macOS, you may encounter a series of warnings like this:
+
+```
+/Users/andrea/.pub-cache/hosted/pub.dev/firebase_auth-4.19.5/macos/Classes/FLTPhoneNumberVerificationStreamHandler.m:8:17: warning: method definition for 'initWithAuth:arguments:' not found [-Wincomplete-implementation]
+@implementation FLTPhoneNumberVerificationStreamHandler {
+                ^
+In file included from /Users/andrea/.pub-cache/hosted/pub.dev/firebase_auth-4.19.5/macos/Classes/FLTPhoneNumberVerificationStreamHandler.m:5:
+- (instancetype)initWithAuth:(FIRAuth *)auth arguments:(NSDictionary *)arguments;
+^
+1 warning generated.
+```
+
+From what I can see, these do not affect the app and can be safely ignored.

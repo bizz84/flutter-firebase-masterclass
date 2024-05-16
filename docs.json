@@ -63,6 +63,14 @@
                 [
                     "Extra page shown when swiping back in Safari on iOS",
                     "/faq/extra-page-swiping-safari-ios"
+                ],
+                [
+                    "macOS warning: method definition not found",
+                    "/faq/macos-method-definition-not-found"
+                ],
+                [
+                    "Invalid key/value pair while generating the Pods project on macOS",
+                    "/faq/macos-pods-invalid-key-value-pair"
                 ]
             ]
         ],
@@ -143,6 +151,10 @@
                 [
                     "November 2023 Update",
                     "/updates/2023-11"
+                ],
+                [
+                    "May 2024 Update",
+                    "/updates/2024-05"
                 ]
             ]
         ],
