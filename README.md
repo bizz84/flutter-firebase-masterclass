@@ -49,6 +49,12 @@ cd ecommerce_app
 flutterfire configure
 ```
 
+To ensure the Firebase rules and cloud functions are deployed, run:
+
+```
+firebase deploy
+```
+
 ### Stripe Setup
 
 In module 8 of the course, we add Stripe to the eCommerce app.
