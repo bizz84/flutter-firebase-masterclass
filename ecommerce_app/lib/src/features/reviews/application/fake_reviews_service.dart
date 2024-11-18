@@ -4,6 +4,7 @@ import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/features/reviews/data/fake_reviews_repository.dart';
 import 'package:ecommerce_app/src/features/reviews/domain/review.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fake_reviews_service.g.dart';
@@ -68,7 +69,7 @@ class FakeReviewsService {
 }
 
 @riverpod
-FakeReviewsService reviewsService(ReviewsServiceRef ref) {
+FakeReviewsService reviewsService(Ref ref) {
   return FakeReviewsService(
     fakeProductsRepository: ref.watch(productsRepositoryProvider),
     authRepository: ref.watch(authRepositoryProvider),
@@ -78,7 +79,7 @@ FakeReviewsService reviewsService(ReviewsServiceRef ref) {
 
 /// Check if a product was previously reviewed by the user
 @riverpod
-Future<Review?> userReviewFuture(UserReviewFutureRef ref, ProductID productId) {
+Future<Review?> userReviewFuture(Ref ref, ProductID productId) {
   final user = ref.watch(authStateChangesProvider).value;
   if (user != null) {
     return ref
@@ -91,7 +92,7 @@ Future<Review?> userReviewFuture(UserReviewFutureRef ref, ProductID productId) {
 
 /// Check if a product was previously reviewed by the user
 @riverpod
-Stream<Review?> userReviewStream(UserReviewStreamRef ref, ProductID productId) {
+Stream<Review?> userReviewStream(Ref ref, ProductID productId) {
   final user = ref.watch(authStateChangesProvider).value;
   if (user != null) {
     return ref

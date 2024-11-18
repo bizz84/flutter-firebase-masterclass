@@ -6,7 +6,7 @@ part of 'cart_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cartServiceHash() => r'3cce4494cab5efe7a277c7c1ee4ca850839745e6';
+String _$cartServiceHash() => r'39c8f9110000b97aacdb92c65d04e7d467a05feb';
 
 /// See also [cartService].
 @ProviderFor(cartService)
@@ -19,8 +19,10 @@ final cartServiceProvider = AutoDisposeProvider<CartService>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CartServiceRef = AutoDisposeProviderRef<CartService>;
-String _$cartHash() => r'93c5bc4fd89471ade34d73d50a3aff12d52a7655';
+String _$cartHash() => r'869f594bde7568b7863f4953bd1b763fbc52afb6';
 
 /// See also [cart].
 @ProviderFor(cart)
@@ -33,8 +35,10 @@ final cartProvider = AutoDisposeStreamProvider<Cart>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CartRef = AutoDisposeStreamProviderRef<Cart>;
-String _$cartItemsCountHash() => r'7801d6af4f77311621f7628b30b2dd656c410fae';
+String _$cartItemsCountHash() => r'691fed458b5c5b8d7a5e9602dfbf29019ffc9175';
 
 /// See also [cartItemsCount].
 @ProviderFor(cartItemsCount)
@@ -48,8 +52,10 @@ final cartItemsCountProvider = AutoDisposeProvider<int>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CartItemsCountRef = AutoDisposeProviderRef<int>;
-String _$cartTotalHash() => r'620fa13b324b41b44713aede70cb19b607f395cb';
+String _$cartTotalHash() => r'6d6793911f824ffa699d2d1aa904729e05de6756';
 
 /// See also [cartTotal].
 @ProviderFor(cartTotal)
@@ -62,9 +68,11 @@ final cartTotalProvider = AutoDisposeProvider<double>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CartTotalRef = AutoDisposeProviderRef<double>;
 String _$itemAvailableQuantityHash() =>
-    r'bf8ea212feaa0322b97753a9a241cbd1da278c2f';
+    r'7862f2c468049a37946711a9e97e8c66b35fe020';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -200,6 +208,8 @@ class ItemAvailableQuantityProvider extends AutoDisposeProvider<int> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ItemAvailableQuantityRef on AutoDisposeProviderRef<int> {
   /// The parameter `product` of this provider.
   Product get product;
@@ -213,4 +223,4 @@ class _ItemAvailableQuantityProviderElement
   Product get product => (origin as ItemAvailableQuantityProvider).product;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

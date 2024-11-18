@@ -5,6 +5,7 @@ import 'package:ecommerce_app/src/features/orders/data/fake_orders_repository.da
 import 'package:ecommerce_app/src/features/orders/domain/order.dart';
 import 'package:ecommerce_app/src/features/products/data/fake_products_repository.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fake_checkout_service.g.dart';
@@ -79,7 +80,7 @@ class FakeCheckoutService {
 }
 
 @riverpod
-FakeCheckoutService checkoutService(CheckoutServiceRef ref) {
+FakeCheckoutService checkoutService(Ref ref) {
   return FakeCheckoutService(
     authRepository: ref.watch(authRepositoryProvider),
     remoteCartRepository: ref.watch(remoteCartRepositoryProvider),

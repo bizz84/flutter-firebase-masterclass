@@ -7,7 +7,7 @@ part of 'fake_products_repository.dart';
 // **************************************************************************
 
 String _$productsRepositoryHash() =>
-    r'5d9a16e62b8afeaf937c6cf4a1a10eb76654ba80';
+    r'f7069543134e45e662e57807927ab7f7c9d359c5';
 
 /// See also [productsRepository].
 @ProviderFor(productsRepository)
@@ -21,9 +21,11 @@ final productsRepositoryProvider = Provider<FakeProductsRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ProductsRepositoryRef = ProviderRef<FakeProductsRepository>;
 String _$productsListStreamHash() =>
-    r'6ce4881c188ad3ff4e1f795150e00decd5aa2fa0';
+    r'22462209e383d9cb6a76936536ec6a6993ce872a';
 
 /// See also [productsListStream].
 @ProviderFor(productsListStream)
@@ -38,9 +40,11 @@ final productsListStreamProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ProductsListStreamRef = AutoDisposeStreamProviderRef<List<Product>>;
 String _$productsListFutureHash() =>
-    r'8f018bf574c889710ce2ba492782d7bb421cfbed';
+    r'742610200192d5593bc85a891d018f70898e048a';
 
 /// See also [productsListFuture].
 @ProviderFor(productsListFuture)
@@ -55,8 +59,10 @@ final productsListFutureProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ProductsListFutureRef = AutoDisposeFutureProviderRef<List<Product>>;
-String _$productHash() => r'5a13397cd9ecf77474aef18035961240f3400e67';
+String _$productHash() => r'14fb39b833468547d27cb1147865057b0abe2ee8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -191,6 +197,8 @@ class ProductProvider extends AutoDisposeStreamProvider<Product?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ProductRef on AutoDisposeStreamProviderRef<Product?> {
   /// The parameter `id` of this provider.
   String get id;
@@ -205,7 +213,7 @@ class _ProductProviderElement extends AutoDisposeStreamProviderElement<Product?>
 }
 
 String _$productsListSearchHash() =>
-    r'33cf7e75761fb69648ff1f5d116a3802291d4527';
+    r'c9bea8edca5bf42f40d1ec63f40f1591efb2faef';
 
 /// See also [productsListSearch].
 @ProviderFor(productsListSearch)
@@ -321,6 +329,8 @@ class ProductsListSearchProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ProductsListSearchRef on AutoDisposeFutureProviderRef<List<Product>> {
   /// The parameter `query` of this provider.
   String get query;
@@ -335,4 +345,4 @@ class _ProductsListSearchProviderElement
   String get query => (origin as ProductsListSearchProvider).query;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

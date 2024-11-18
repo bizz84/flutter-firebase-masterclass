@@ -11,7 +11,7 @@ final productsSearchQueryStateProvider = StateProvider<String>((ref) {
 });
 
 @riverpod
-Future<List<Product>> productsSearchResults(ProductsSearchResultsRef ref) {
+Future<List<Product>> productsSearchResults(Ref ref) {
   final searchQuery = ref.watch(productsSearchQueryStateProvider);
   return ref.watch(productsListSearchProvider(searchQuery).future);
 }

@@ -4,6 +4,7 @@ import 'package:ecommerce_app/src/features/products/data/test_products.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fake_products_repository.g.dart';
@@ -80,31 +81,31 @@ class FakeProductsRepository {
 }
 
 @Riverpod(keepAlive: true)
-FakeProductsRepository productsRepository(ProductsRepositoryRef ref) {
+FakeProductsRepository productsRepository(Ref ref) {
   return FakeProductsRepository(addDelay: true);
 }
 
 @riverpod
-Stream<List<Product>> productsListStream(ProductsListStreamRef ref) {
+Stream<List<Product>> productsListStream(Ref ref) {
   final productsRepository = ref.watch(productsRepositoryProvider);
   return productsRepository.watchProductsList();
 }
 
 @riverpod
-Future<List<Product>> productsListFuture(ProductsListFutureRef ref) {
+Future<List<Product>> productsListFuture(Ref ref) {
   final productsRepository = ref.watch(productsRepositoryProvider);
   return productsRepository.fetchProductsList();
 }
 
 @riverpod
-Stream<Product?> product(ProductRef ref, ProductID id) {
+Stream<Product?> product(Ref ref, ProductID id) {
   final productsRepository = ref.watch(productsRepositoryProvider);
   return productsRepository.watchProduct(id);
 }
 
 @riverpod
 Future<List<Product>> productsListSearch(
-    ProductsListSearchRef ref, String query) async {
+    Ref ref, String query) async {
   final link = ref.keepAlive();
   // a timer to be used by the callbacks below
   Timer? timer;

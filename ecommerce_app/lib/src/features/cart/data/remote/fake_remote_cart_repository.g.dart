@@ -7,7 +7,7 @@ part of 'fake_remote_cart_repository.dart';
 // **************************************************************************
 
 String _$remoteCartRepositoryHash() =>
-    r'90ab3b0fbaab687d952757339bdafabb8c42f947';
+    r'6b982315ef34d5cdeeb60f0c3b86f8883632420e';
 
 /// See also [remoteCartRepository].
 @ProviderFor(remoteCartRepository)
@@ -22,6 +22,8 @@ final remoteCartRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef RemoteCartRepositoryRef = ProviderRef<FakeRemoteCartRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/src/features/cart/domain/cart.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'local_cart_repository.g.dart';
@@ -13,6 +14,6 @@ abstract class LocalCartRepository {
 }
 
 @Riverpod(keepAlive: true)
-LocalCartRepository localCartRepository(LocalCartRepositoryRef ref) {
+LocalCartRepository localCartRepository(Ref ref) {
   throw UnimplementedError();
 }

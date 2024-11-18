@@ -2,6 +2,7 @@ import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
 import 'package:ecommerce_app/src/features/cart/domain/cart.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fake_remote_cart_repository.g.dart';
@@ -35,6 +36,6 @@ class FakeRemoteCartRepository {
 }
 
 @Riverpod(keepAlive: true)
-FakeRemoteCartRepository remoteCartRepository(RemoteCartRepositoryRef ref) {
+FakeRemoteCartRepository remoteCartRepository(Ref ref) {
   return FakeRemoteCartRepository(addDelay: false);
 }

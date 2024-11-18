@@ -6,7 +6,7 @@ part of 'user_orders_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userOrdersHash() => r'ba100312a11b7f0eff43d8835cdfe16b71938684';
+String _$userOrdersHash() => r'9de05d80e372e45d75dcd35c102c9cde16927978';
 
 /// Watch the list of user orders
 /// NOTE: Only watch this provider if the user is signed in.
@@ -22,9 +22,11 @@ final userOrdersProvider = AutoDisposeStreamProvider<List<Order>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef UserOrdersRef = AutoDisposeStreamProviderRef<List<Order>>;
 String _$matchingUserOrdersHash() =>
-    r'226effd50fd464db4730e05e4120c7a4e53ec57c';
+    r'd617757f3d6919b19f69f927c1f2dd1747186a6d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -173,6 +175,8 @@ class MatchingUserOrdersProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin MatchingUserOrdersRef on AutoDisposeStreamProviderRef<List<Order>> {
   /// The parameter `productId` of this provider.
   String get productId;
@@ -187,4 +191,4 @@ class _MatchingUserOrdersProviderElement
   String get productId => (origin as MatchingUserOrdersProvider).productId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

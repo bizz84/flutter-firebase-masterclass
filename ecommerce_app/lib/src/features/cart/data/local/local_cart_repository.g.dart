@@ -7,7 +7,7 @@ part of 'local_cart_repository.dart';
 // **************************************************************************
 
 String _$localCartRepositoryHash() =>
-    r'e13ac4190cf19fa3f638b583d346d5145c6f6a1e';
+    r'a9f6d6a53c7543c55e78dc753787171b1a62b066';
 
 /// See also [localCartRepository].
 @ProviderFor(localCartRepository)
@@ -21,6 +21,8 @@ final localCartRepositoryProvider = Provider<LocalCartRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef LocalCartRepositoryRef = ProviderRef<LocalCartRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

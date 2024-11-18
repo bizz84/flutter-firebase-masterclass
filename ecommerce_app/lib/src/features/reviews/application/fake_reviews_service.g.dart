@@ -6,7 +6,7 @@ part of 'fake_reviews_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$reviewsServiceHash() => r'211d91aaa829748b4823d0129dfbbe5b796fa37b';
+String _$reviewsServiceHash() => r'00b452c8017376fabd7c54cfe123830d6960877f';
 
 /// See also [reviewsService].
 @ProviderFor(reviewsService)
@@ -20,8 +20,10 @@ final reviewsServiceProvider = AutoDisposeProvider<FakeReviewsService>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ReviewsServiceRef = AutoDisposeProviderRef<FakeReviewsService>;
-String _$userReviewFutureHash() => r'98a78f997bf77c9b2cb80da2ddb23242c933893f';
+String _$userReviewFutureHash() => r'ffd3abe0878704159bb7a63e6cb46377c9054a38';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -169,6 +171,8 @@ class UserReviewFutureProvider extends AutoDisposeFutureProvider<Review?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin UserReviewFutureRef on AutoDisposeFutureProviderRef<Review?> {
   /// The parameter `productId` of this provider.
   String get productId;
@@ -182,7 +186,7 @@ class _UserReviewFutureProviderElement
   String get productId => (origin as UserReviewFutureProvider).productId;
 }
 
-String _$userReviewStreamHash() => r'929c44de465ca195cb9f12203943b7bb4bdfda26';
+String _$userReviewStreamHash() => r'a2ba31997d0122483ae686b9942cb555c69801f7';
 
 /// Check if a product was previously reviewed by the user
 ///
@@ -309,6 +313,8 @@ class UserReviewStreamProvider extends AutoDisposeStreamProvider<Review?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin UserReviewStreamRef on AutoDisposeStreamProviderRef<Review?> {
   /// The parameter `productId` of this provider.
   String get productId;
@@ -322,4 +328,4 @@ class _UserReviewStreamProviderElement
   String get productId => (origin as UserReviewStreamProvider).productId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
