@@ -12,7 +12,10 @@ import 'package:ecommerce_app/src/routing/go_router_refresh_stream.dart';
 import 'package:ecommerce_app/src/routing/not_found_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'app_router.g.dart';
 
 /// All the supported routes in the app.
 /// By using an enum, we route by name using this syntax:
@@ -31,7 +34,8 @@ enum AppRoute {
 }
 
 /// returns the GoRouter instance that defines all the routes in the app
-final goRouterProvider = Provider<GoRouter>((ref) {
+@riverpod
+GoRouter goRouter(Ref ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return GoRouter(
     initialLocation: '/',
@@ -129,4 +133,4 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );
-});
+}
