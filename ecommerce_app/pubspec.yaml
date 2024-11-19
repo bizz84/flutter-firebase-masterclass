@@ -33,7 +33,7 @@ dependencies:
   flutter_stripe_web: 6.5.0
   pay: 3.2.1
   envied: 1.1.1
-  # algolia: 1.1.2
+  algolia_helper_flutter: 1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +48,13 @@ dev_dependencies:
   mocktail: 1.0.4
   riverpod_generator: 2.6.4
   envied_generator: 1.1.1
+
+# Workaround for this issue: https://github.com/algolia/algoliasearch-helper-flutter/issues/151
+dependency_overrides:
+  algolia_client_core: 1.27.1
+  algolia_client_insights: 1.27.1
+  algolia_client_search: 1.27.1
+  algoliasearch: 1.27.1
 
 # Custom app icon. For more info see: https://pub.dev/packages/flutter_launcher_icons
 flutter_icons:
