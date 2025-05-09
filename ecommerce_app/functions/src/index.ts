@@ -1,53 +1,19 @@
-import * as admin from "firebase-admin"
-import * as functionsV1 from "firebase-functions/v1"
-import * as functionsV2 from "firebase-functions/v2"
+/**
+ * Import function triggers from their respective submodules:
+ *
+ * import {onCall} from "firebase-functions/v2/https";
+ * import {onDocumentWritten} from "firebase-functions/v2/firestore";
+ *
+ * See a full list of supported triggers at https://firebase.google.com/docs/functions
+ */
 
-admin.initializeApp()
+import {onRequest} from "firebase-functions/v2/https";
+import * as logger from "firebase-functions/logger";
 
-// Admin
-import { makeAdminIfWhitelisted } from "./admin"
+// Start writing functions
+// https://firebase.google.com/docs/functions/typescript
 
-exports.onUserCreated = functionsV1.auth.user().onCreate((user, _) => makeAdminIfWhitelisted(user))
-
-import { stripeSecretKey } from "./stripe_secret"
-// Stripe triggers
-import {
-  onStripeProductWritten,
-  onStripePriceWritten,
-  onStripeCustomerCreated,
-  onStripePaymentWritten,
-} from "./stripe"
-
-// Triggered when a Stripe product is written to Firestore
-exports.onStripeProductWritten = functionsV2.firestore.onDocumentWritten(
-  "/stripe_products/{id}",
-  onStripeProductWritten,
-)
-
-// Triggered when a Stripe price is written to Firestore
-exports.onStripePriceWritten = functionsV2.firestore.onDocumentWritten(
-  "/stripe_products/{id}/prices/{priceId}",
-  onStripePriceWritten,
-)
-
-// Triggered when a Stripe customer is created
-exports.onStripeCustomerCreated = functionsV2.firestore.onDocumentCreated(
-  "/stripe_customers/{id}",
-  onStripeCustomerCreated,
-)
-
-exports.onStripePaymentWritten = functionsV2.firestore.onDocumentWritten(
-  {
-    document: "/stripe_customers/{stripeId}/payments/{paymentId}",
-    secrets: [stripeSecretKey],
-  },
-  onStripePaymentWritten,
-)
-
-// Ratings
-import { updateRating } from "./ratings"
-
-exports.onProductReviewWritten = functionsV2.firestore.onDocumentWritten(
-  "products/{id}/reviews/{uid}",
-  updateRating,
-)
+export const helloWorld = onRequest((request, response) => {
+  logger.info("Hello logs!", {structuredData: true});
+  response.send("Hello from Firebase!");
+});
