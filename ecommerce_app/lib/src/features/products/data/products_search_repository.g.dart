@@ -26,7 +26,7 @@ final productsSearchRepositoryProvider =
 // ignore: unused_element
 typedef ProductsSearchRepositoryRef = ProviderRef<ProductsSearchRepository>;
 String _$productsListSearchHash() =>
-    r'4708fcdee14196b7c62f8bfe42f69ead79bffdcc';
+    r'ba15dafcfc53f8d3fcfcc8f0c2eba990897f7b37';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -12,6 +12,13 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+//todo: https://firebase.google.com/docs/app-check/flutter/debug-provider
+  // await FirebaseAppCheck.instance.activate(
+  //   // Set appleProvider to `AppleProvider.debug`
+  //   appleProvider: AppleProvider.debug,
+  // );
+
   // * Uncomment this if you need to sign out when switching between Firebase
   // * projects (e.g. Firebase Local emulator vs real Firebase backend)
   // await FirebaseAuth.instance.signOut();
